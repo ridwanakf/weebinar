@@ -1,0 +1,125 @@
+{{define "detail"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{{.title}}</title>
+    {{template "_header"}}
+</head>
+
+<body>
+    {{template "_navbar"}}
+    <div class="container mt-4">
+        <div class="row mb-3">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 mb-3">
+                        <div class="card">
+                            <img class="card-img-top" src="/assets/images/4253128.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <div class="h2">Webinar 1</div>
+                                <div class="card-text">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed eros
+                                    vehicula, pellentesque est et, tincidunt purus. Aliquam arcu quam, dictum non
+                                    pretium id, viverra vitae leo. Sed mattis, nisi et tincidunt vulputate, odio risus
+                                    convallis velit, vel venenatis eros eros nec massa. Suspendisse faucibus enim eget
+                                    nisi convallis, quis pharetra tortor interdum. Duis eu risus sed odio dapibus tempus
+                                    nec ac nibh. Vivamus in velit sit amet sapien feugiat vestibulum. Praesent ligula
+                                    augue, imperdiet nec pulvinar sit amet, ullamcorper nec nunc. In lectus turpis,
+                                    laoreet vel ante in, sodales lacinia urna. Proin vulputate ex tincidunt nulla
+                                    sollicitudin pulvinar. Quisque sit amet lacinia purus. Duis tincidunt massa eros, a
+                                    molestie quam mollis et. Vivamus vehicula est at varius rutrum. In non elit magna.
+                                    Donec at dolor condimentum, ullamcorper mi quis, imperdiet arcu.
+                                    <br>
+                                    <br>Vivamus non massa at quam luctus consequat. Mauris non leo a ipsum gravida
+                                    feugiat ut a orci. Donec sollicitudin, mauris vel posuere iaculis, diam lectus
+                                    accumsan augue, sed placerat quam urna vel sapien. Cras convallis viverra leo nec
+                                    porttitor. Morbi nisl nibh, efficitur non nisi ac, porta molestie tortor. Maecenas
+                                    mattis viverra leo sed sollicitudin. Cras ultricies dui eget vulputate egestas.
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Webinar Details</h5>
+                                <p class="card-text">Date: </p>
+                                <p class="card-text">Category: </p>
+                                <p class="card-text">Teacher: </p>
+                                <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="card-link">Card link</a>
+                                    <a href="#" class="card-link">Another link</a> -->
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Participants</h5>
+                                <div class="mb-2">
+                                    <div class="row">
+
+                                    </div>
+                                    <div class="col-6">Apoy</div>
+                                    <div class="col-6">
+                                        <div class="btn btn-success">Approved</div>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <div class="row">
+                                        <div class="col-6">Faank</div>
+                                        <div class="col-6">
+                                            <div class="btn btn-danger">
+                                                Not Approved
+                                            </div>
+                                        </div>    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Announcements</h5>
+                                <div class="row mb-2">
+                                    <div class="col-12">
+                                        <small id="date" class="text-secondary" style="margin: 0;">
+                                            <script>
+                                                document.getElementById("date").innerHTML = Date();
+                                            </script>
+                                            <div class="card-title">
+                                                This is an announcement
+                                            </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <form action="" method="POST">
+                                            <div class="form-group">
+                                                <!-- <label for="description">Announcement</label> -->
+                                                <textarea class="form-control" id="announcement" name="announcement"
+                                                    cols="30" rows="4"
+                                                    placeholder="Write an announcement here..."></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-dark btn-block">Announce</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <img class="card-img-top" src="images/4253128.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Webinar 2</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div> -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+{{end}}

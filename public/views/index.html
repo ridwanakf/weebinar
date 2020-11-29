@@ -1,0 +1,36 @@
+{{define "index"}}
+<html lang="en">
+<head>
+    <title>{{.title}}</title>
+    {{template "_header"}}
+</head>    
+<body class="index">
+    <div class="container mt-lg-5 py-lg-5 mt-md-5 py-md-5">
+        <div class="row mt-lg-5 mt-md-5">
+            <div class="col-lg-7 col-md-7">
+                <div class="content mx-lg-0 mx-md-0 mx-3 my-lg-0 my-3">
+                    <h1 class="display-2  pt-lg-5 pt-md-5" style="color: #ffffff;"><b>Weebinar</b></h1>
+                    <h4 class="lead" style="color: #ffffff;">
+                        Create and Share Webinars :)
+                    </h4>    
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-5">
+                <div class="content content-settings mx-lg-0 mx-md-0 mx-3 mt-lg-0 mt-md-0 mt-5 py-5 px-4">
+                    <h4 class="center text-dark mb-4"><b><u>Sign In or Sign Up</u></b></h4>
+                    <form action="POST" action="">
+                      <a href="" class="btn btn-dark btn-block mb-2">
+                          <i class="fab fa-google fa-fw"></i> Sign In with Google
+                      </a>
+                      <p class="center">or</p>
+                      <a href="/role" class="btn btn-dark btn-block">
+                          <i class="fab fa-google fa-fw"></i> Sign Up with Google
+                      </a>
+                    </form>  
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{{end}}

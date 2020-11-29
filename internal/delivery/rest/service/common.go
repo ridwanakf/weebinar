@@ -16,7 +16,5 @@ func NewCommonService(app *app.WeebinarApp) *CommonService {
 }
 
 func (s *CommonService) IndexHandler(c echo.Context) error {
-	return c.JSON(http.StatusOK, map[string]interface{}{
-		"message": "success",
-	})
+	return c.Render(http.StatusOK, "index", nil)
 }

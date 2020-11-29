@@ -2,6 +2,8 @@ package server
 
 import (
 	"context"
+	"html/template"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -28,8 +30,19 @@ func New() *echo.Echo {
 	custErr := &customErrHandler{e: e}
 	e.HTTPErrorHandler = custErr.handler
 	e.Binder = &CustomBinder{b: &echo.DefaultBinder{}}
-
+	e.Renderer = &TemplateRenderer{
+		templates: template.Must(template.ParseGlob("public/views/*.html")),
+	}
+	e.Static("/assets", "public/assets")
 	return e
+}
+
+type TemplateRenderer struct {
+	templates *template.Template
+}
+
+func (t *TemplateRenderer) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
+	return t.templates.ExecuteTemplate(w, name, data)
 }
 
 // Start starts echo server
