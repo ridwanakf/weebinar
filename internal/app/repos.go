@@ -1,11 +1,15 @@
 package app
 
 import (
+	"github.com/ridwanakf/weebinar/internal"
 	"github.com/ridwanakf/weebinar/internal/app/config"
 )
 
 type Repos struct {
-
+	CommonRepo internal.CommonRepo
+	TeacherRepo internal.TeacherRepo
+	StudentRepo internal.StudentRepo
+	WebinarRepo internal.WebinarRepo
 }
 
 func newRepos(cfg *config.Config) (*Repos, error) {
