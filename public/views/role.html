@@ -1,0 +1,29 @@
+{{define "role"}}
+<html lang="en">
+<head>
+    <title>{{.title}}</title>
+    {{template "_header"}}
+</head>    
+<body class="index">
+    <div class="container mt-5 py-5">
+        <div class="row mt-5 py-4">
+            <div class="col"></div>
+            <div class="col-lg-6 col-md-6 col-10">
+                <div class="card center">
+                    <div class="card-body">
+                        <h5 class="mb-4">Are you a teacher or a student?</h5>
+                        <div class="d-flex justify-content-center row mb-4">
+                            <a href="/home" class="btn btn-outline-dark px-5">Teacher</a>
+                        </div>
+                        <div class="d-flex justify-content-center row mb-3">
+                            <a href="#" class="btn btn-outline-dark px-5">Student</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+</body>
+</html>
+{{end}}

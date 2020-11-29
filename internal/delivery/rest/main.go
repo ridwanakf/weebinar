@@ -7,16 +7,29 @@ import (
 	"github.com/ridwanakf/weebinar/internal/delivery/rest/service"
 )
 
-func initAPIHandler(eg *echo.Group, svc *service.Services) {
+func initCommonHandlers(eg *echo.Group, svc *service.Services) {
+	eg.GET("", svc.CommonService.IndexHandler)
+}
+
+func initTeacherHandlers(eg *echo.Group, svc *service.Services) {
+}
+
+func initStudentHandlers(eg *echo.Group, svc *service.Services) {
 }
 
 func Start(app *app.WeebinarApp) {
 	srv := server.New()
 	svc := service.GetServices(app)
 
-	// API Handlers
-	api := srv.Group("/api/v1")
-	initAPIHandler(api, svc)
+	// Handlers Groups
+	commonGroup := srv.Group("/")
+	initCommonHandlers(commonGroup, svc)
+
+	teacherGroup := srv.Group("/teacher")
+	initTeacherHandlers(teacherGroup, svc)
+
+	studentGroup := srv.Group("/student")
+	initStudentHandlers(studentGroup, svc)
 
 	server.Start(srv, &app.Cfg.Server)
 }
