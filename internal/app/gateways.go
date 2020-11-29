@@ -1,18 +1,14 @@
 package app
 
 import (
-	"github.com/ridwanakf/autobase-twitter/internal"
-	"github.com/ridwanakf/autobase-twitter/internal/app/config"
-	"github.com/ridwanakf/autobase-twitter/internal/gateway"
+	"github.com/ridwanakf/weebinar/internal/app/config"
 )
 
 type Gateways struct {
-	AutobaseGW internal.AutobaseGW
 }
 
 func newGateways(cfg *config.Config) *Gateways {
 	return &Gateways{
-		AutobaseGW: gateway.NewAutobaseGateway(cfg.Twitter),
 	}
 }
 
