@@ -11,8 +11,6 @@ type CommonUC interface {
 }
 
 type TeacherUC interface {
-	SignUp() error
-	SignIn() error
 	GetAllWebinar(id int64) ([]entity.Webinar, error)
 	CreateNewWebinar(id int64, param entity.CreateWebinarParam) (entity.Webinar, error)
 	UpdateWebinar(id int64, param entity.UpdateWebinarParam) error
@@ -20,8 +18,6 @@ type TeacherUC interface {
 }
 
 type StudentUC interface {
-	SignUp() error
-	SignIn() error
 	SearchWebinarBySlug(slug string) ([]entity.Webinar, error)
 	EnrollWebinar(id int64, param entity.EnrollWebinarParam) error
 	GetAllRegisteredWebinar(id int64) ([]entity.StudentWebinar, error)
