@@ -1,6 +1,11 @@
 package main
 
-import "log"
+import (
+	"log"
+
+	"github.com/ridwanakf/weebinar/internal/app"
+	"github.com/ridwanakf/weebinar/internal/delivery/rest"
+)
 
 func main() {
 	// init app
