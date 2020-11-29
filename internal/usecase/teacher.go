@@ -14,6 +14,10 @@ func NewTeacherUsecase(repoTeacher internal.TeacherRepo, repoWebinar internal.We
 	return &TeacherUsecase{repoTeacher: repoTeacher, repoWebinar: repoWebinar}
 }
 
+func (t *TeacherUsecase) TeacherSignIn(id int64) (entity.User, error) {
+	panic("implement me")
+}
+
 func (t *TeacherUsecase) GetAllWebinar(id int64) ([]entity.Webinar, error) {
 	panic("implement me")
 }
