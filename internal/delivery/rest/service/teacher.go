@@ -1,10 +1,11 @@
 package service
 
 import (
-	"github.com/labstack/echo"
+	"net/http"
+
+	"github.com/labstack/echo/v4"
 	"github.com/ridwanakf/weebinar/internal"
 	"github.com/ridwanakf/weebinar/internal/app"
-	"net/http"
 )
 
 type TeacherService struct {
@@ -17,8 +18,18 @@ func NewTeacherService(app *app.WeebinarApp) *TeacherService {
 	}
 }
 
-func (s *TeacherService) IndexHandler(c echo.Context) error {
-	return c.JSON(http.StatusOK, map[string]interface{}{
-		"message": "success",
-	})
+func (s *TeacherService) HomeTeacherPageHandler(c echo.Context) error {
+	return c.Render(http.StatusOK, "home", nil)
+}
+
+func (s *TeacherService) ProfileTeacherPageHandler(c echo.Context) error {
+	return c.Render(http.StatusOK, "settings", nil)
+}
+
+func (s *TeacherService) CreateWebinarPageHandler(c echo.Context) error {
+	return c.Render(http.StatusOK, "create", nil)
+}
+
+func (s *TeacherService) CreateWebinarPostHandler(c echo.Context) error {
+	return c.Render(http.StatusOK, "index", nil)
 }
