@@ -14,7 +14,7 @@ func NewStudentUsecase(repoStudent internal.StudentRepo, repoWebinar internal.We
 	return &StudentUsecase{repoStudent: repoStudent, repoWebinar: repoWebinar}
 }
 
-func (s *StudentUsecase) StudentSignIn(id int64) (entity.User, error) {
+func (s *StudentUsecase) StudentSignIn(id int64) (entity.Student, error) {
 	panic("implement me")
 }
 
@@ -26,7 +26,7 @@ func (s *StudentUsecase) EnrollWebinar(id int64, param entity.EnrollWebinarParam
 	panic("implement me")
 }
 
-func (s *StudentUsecase) GetAllRegisteredWebinar(id int64) ([]entity.StudentWebinar, error) {
+func (s *StudentUsecase) GetAllRegisteredWebinar(id int64) ([]entity.Webinar, error) {
 	panic("implement me")
 }
 
