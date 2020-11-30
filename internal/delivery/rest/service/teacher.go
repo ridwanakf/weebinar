@@ -2,7 +2,7 @@ package service
 
 import (
 	"net/http"
-	
+
 	"github.com/labstack/echo/v4"
 	"github.com/ridwanakf/weebinar/internal"
 	"github.com/ridwanakf/weebinar/internal/app"
@@ -18,18 +18,18 @@ func NewTeacherService(app *app.WeebinarApp) *TeacherService {
 	}
 }
 
-func (s *TeacherService) HomeTeacherHandler(c echo.Context) error {
+func (s *TeacherService) HomeTeacherPageHandler(c echo.Context) error {
 	return c.Render(http.StatusOK, "home", nil)
 }
 
-func (s *TeacherService) ProfileTeacherHandler(c echo.Context) error {
+func (s *TeacherService) ProfileTeacherPageHandler(c echo.Context) error {
 	return c.Render(http.StatusOK, "settings", nil)
 }
 
-func (s *TeacherService) CreateWebinarHandler(c echo.Context) error {
+func (s *TeacherService) CreateWebinarPageHandler(c echo.Context) error {
 	return c.Render(http.StatusOK, "create", nil)
 }
 
-func (s *TeacherService) PostCreateWebinarHandler(c echo.Context) error {
+func (s *TeacherService) CreateWebinarPostHandler(c echo.Context) error {
 	return c.Render(http.StatusOK, "index", nil)
 }

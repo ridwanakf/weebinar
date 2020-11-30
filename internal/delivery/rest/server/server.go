@@ -27,7 +27,7 @@ func New() *echo.Echo {
 		middleware.Secure(),
 		md.CORS(),
 		md.Headers(),
-		session.Middleware(sessions.NewCookieStore([]byte("secret"))))
+		session.Middleware(sessions.NewCookieStore([]byte("secrettttt"))))
 
 	e.Validator = &CustomValidator{V: validator.New()}
 	custErr := &customErrHandler{e: e}
