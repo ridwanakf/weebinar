@@ -12,17 +12,21 @@ import (
 )
 
 func initCommonHandlers(eg *echo.Group, svc *service.Services) {
-	eg.GET("", svc.CommonService.IndexHandler)
+	eg.GET("/", svc.CommonService.IndexHandler)
+	eg.POST("/teacher/login", svc.CommonService.TeacherSignInHandler)
+	eg.GET("/teacher/login/callback", svc.CommonService.TeacherSignInCallbackHandler)
+	eg.POST("/student/login", svc.CommonService.StudentSignInHandler)
+	eg.GET("/student/login/callback", svc.CommonService.StudentSignInCallbackHandler)
 
 	// TODO: hapus kalo udah gk dipake buat test session lagi
-	eg.GET("sess", func(c echo.Context) error {
+	eg.GET("/sess", func(c echo.Context) error {
 		sess, _ := session.Get("session", c)
 		sess.Options = &sessions.Options{
 			Path:     "/",
 			MaxAge:   86400 * 7,
 			HttpOnly: true,
 		}
-		sess.Values["email"] = "test"
+		sess.Values["id"] = int64(12)
 		sess.Values["role"] = "teacher"
 		sess.Save(c.Request(), c.Response())
 		return c.NoContent(http.StatusOK)
@@ -44,7 +48,7 @@ func Start(app *app.WeebinarApp) {
 	svc := service.GetServices(app)
 
 	// Handlers Groups
-	commonGroup := srv.Group("/")
+	commonGroup := srv.Group("")
 	initCommonHandlers(commonGroup, svc)
 
 	teacherGroup := srv.Group("/teacher")

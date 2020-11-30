@@ -3,7 +3,8 @@ package internal
 import "github.com/ridwanakf/weebinar/internal/entity"
 
 type TeacherUC interface {
-	TeacherSignIn(id int64) (entity.Teacher, error)
+	TeacherSignIn(id int64) error
+	TeacherSignUp(teacher entity.Teacher) error
 
 	GetAllWebinar(id int64) ([]entity.Webinar, error)
 	CreateNewWebinar(id int64, param entity.CreateWebinarParam) (entity.Webinar, error)
@@ -14,7 +15,9 @@ type TeacherUC interface {
 }
 
 type StudentUC interface {
-	StudentSignIn(id int64) (entity.Student, error)
+	StudentSignIn(id int64) error
+	StudentSignUp(student entity.Student) error
+
 	SearchWebinarBySlug(slug string) ([]entity.Webinar, error)
 	EnrollWebinar(id int64, param entity.EnrollWebinarParam) error
 	GetAllRegisteredWebinar(id int64) ([]entity.Webinar, error)

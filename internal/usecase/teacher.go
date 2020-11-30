@@ -14,8 +14,14 @@ func NewTeacherUsecase(repoTeacher internal.TeacherRepo, repoWebinar internal.We
 	return &TeacherUsecase{repoTeacher: repoTeacher, repoWebinar: repoWebinar}
 }
 
-func (t *TeacherUsecase) TeacherSignIn(id int64) (entity.Teacher, error) {
-	panic("implement me")
+func (t *TeacherUsecase) TeacherSignIn(id int64) error {
+	// TODO: Implement me!
+	return entity.ErrUserNotFound
+}
+
+func (t *TeacherUsecase) TeacherSignUp(teacher entity.Teacher) error {
+	// TODO: Implement me!
+	return nil
 }
 
 func (t *TeacherUsecase) GetAllWebinar(id int64) ([]entity.Webinar, error) {
@@ -37,4 +43,3 @@ func (t *TeacherUsecase) DeleteWebinar(id int64, param entity.DeleteWebinarParam
 func (t *TeacherUsecase) ApproveWaitingList(studentID int64, webinarID int64) error {
 	panic("implement me")
 }
-

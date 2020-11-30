@@ -18,7 +18,7 @@ func CheckSession() echo.MiddlewareFunc {
 			}
 
 			// Check if user session exist
-			_, ok := sess.Values["email"]
+			_, ok := sess.Values["id"]
 			if !ok {
 				return c.Redirect(http.StatusTemporaryRedirect, "/")
 			}
