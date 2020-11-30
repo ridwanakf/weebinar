@@ -1,7 +1,7 @@
 package rest
 
 import (
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 	"github.com/ridwanakf/weebinar/internal/app"
 	"github.com/ridwanakf/weebinar/internal/delivery/rest/server"
 	"github.com/ridwanakf/weebinar/internal/delivery/rest/service"
@@ -12,6 +12,10 @@ func initCommonHandlers(eg *echo.Group, svc *service.Services) {
 }
 
 func initTeacherHandlers(eg *echo.Group, svc *service.Services) {
+	eg.GET("/home", svc.HomeTeacherHandler)
+	eg.GET("/profile", svc.ProfileTeacherHandler)
+	eg.GET("/create", svc.CreateWebinarHandler)
+	eg.POST("/create/status", svc.CreateWebinarHandler)
 }
 
 func initStudentHandlers(eg *echo.Group, svc *service.Services) {

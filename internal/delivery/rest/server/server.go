@@ -11,8 +11,10 @@ import (
 	"time"
 
 	"github.com/go-playground/validator"
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
+	"github.com/gorilla/sessions"
+	"github.com/labstack/echo-contrib/session"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/ridwanakf/weebinar/internal/app/config"
 	md "github.com/ridwanakf/weebinar/internal/delivery/rest/middleware"
 )
@@ -24,7 +26,8 @@ func New() *echo.Echo {
 		middleware.Recover(),
 		middleware.Secure(),
 		md.CORS(),
-		md.Headers())
+		md.Headers(),
+		session.Middleware(sessions.NewCookieStore([]byte("secret"))))
 
 	e.Validator = &CustomValidator{V: validator.New()}
 	custErr := &customErrHandler{e: e}
