@@ -14,7 +14,7 @@ func NewTeacherUsecase(repoTeacher internal.TeacherRepo, repoWebinar internal.We
 	return &TeacherUsecase{repoTeacher: repoTeacher, repoWebinar: repoWebinar}
 }
 
-func (t *TeacherUsecase) TeacherSignIn(id int64) (entity.User, error) {
+func (t *TeacherUsecase) TeacherSignIn(id int64) (entity.Teacher, error) {
 	panic("implement me")
 }
 
@@ -33,3 +33,8 @@ func (t *TeacherUsecase) UpdateWebinar(id int64, param entity.UpdateWebinarParam
 func (t *TeacherUsecase) DeleteWebinar(id int64, param entity.DeleteWebinarParam) error {
 	panic("implement me")
 }
+
+func (t *TeacherUsecase) ApproveWaitingList(studentID int64, webinarID int64) error {
+	panic("implement me")
+}
+
