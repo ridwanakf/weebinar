@@ -1,15 +1,19 @@
 package entity
 
-import "time"
+import (
+	"time"
+)
 
 type Webinar struct {
-	ID           int64     `json:"" db:""`
-	TeacherID    int64     `json:"" db:""`
-	Title        string    `json:"" db:""`
-	Desc         string    `json:"" db:""`
-	Participants []Student `json:"" db:""`
-	Schedule     time.Time `json:"" db:""`
-	CreatedAt    time.Time `json:"" db:""`
+	ID           int64     `json:"id" db:"id"`
+	TeacherID    int64     `json:"teacher_id" db:"teacher_id"`
+	Title        string    `json:"title" db:"title"`
+	Desc         string    `json:"description" db:"description"`
+	Link         string    `json:"link" db:"link"`
+	Category     string    `json:"category" db:"category"`
+	Schedule     time.Time `json:"schedule" db:"schedule"`
+	Participants []Student `json:"participants"`
+	CreatedAt    time.Time `json:"created_at" db:"created_at"`
 }
 
 type ListParticipants struct {
@@ -19,10 +23,24 @@ type ListParticipants struct {
 }
 
 type CreateWebinarParam struct {
+	TeacherID int64     `json:"teacher_id" db:"teacher_id"`
+	Title     string    `json:"title" db:"title"`
+	Desc      string    `json:"description" db:"description"`
+	Link      string    `json:"link" db:"link"`
+	Category  string    `json:"category" db:"category"`
+	Schedule  time.Time `json:"schedule" db:"schedule"`
+	CreatedAt time.Time `json:"created_at" db:"created_at"`
 }
 
 type UpdateWebinarParam struct {
+	ID       int64     `db:"id"`
+	Title    string    `json:"title" db:"title"`
+	Desc     string    `json:"description" db:"description"`
+	Link     string    `json:"link" db:"link"`
+	Category string    `json:"category" db:"category"`
+	Schedule time.Time `json:"schedule" db:"schedule"`
 }
 
 type DeleteWebinarParam struct {
+	ID int64 `json:"id" db:"id"`
 }

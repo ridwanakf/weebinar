@@ -24,7 +24,17 @@ func (t *TeacherUsecase) TeacherSignUp(teacher entity.Teacher) error {
 	return nil
 }
 
+func (t *TeacherUsecase) GetTeacherProfile(id int64) (entity.Teacher, error) {
+	// TODO: Implement me!
+	return entity.Teacher{Name: "ridwanakf"}, nil
+}
+
 func (t *TeacherUsecase) GetAllWebinar(id int64) ([]entity.Webinar, error) {
+	// TODO: Implement me!
+	return nil, nil
+}
+
+func (t *TeacherUsecase) GetWebinarByID(id int64) (entity.Webinar, error) {
 	panic("implement me")
 }
 
