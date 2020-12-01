@@ -41,7 +41,7 @@ func (s *TeacherService) HomeTeacherPageHandler(c echo.Context) error {
 		return Logout(c)
 	}
 
-	return c.Render(http.StatusOK, "home", map[string]interface{}{
+	return c.Render(http.StatusOK, "home_teacher", map[string]interface{}{
 		"teacher":  teacher,
 		"webinars": webinars,
 	})
