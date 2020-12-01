@@ -22,7 +22,15 @@ func (s *StudentUsecase) StudentSignUp(student entity.Student) error {
 	panic("implement me")
 }
 
+func (s *StudentUsecase) GetStudentProfile(id int64) (entity.Student, error) {
+	panic("implement me")
+}
+
 func (s *StudentUsecase) SearchWebinarBySlug(slug string) ([]entity.Webinar, error) {
+	panic("implement me")
+}
+
+func (t *StudentUsecase) GetWebinarByID(id int64) (entity.Webinar, error) {
 	panic("implement me")
 }
 
@@ -37,3 +45,4 @@ func (s *StudentUsecase) GetAllRegisteredWebinar(id int64) ([]entity.Webinar, er
 func (s *StudentUsecase) CancelEnrollmentWebinar(id int64, param entity.CancelEnrollmentWebinarParam) error {
 	panic("implement me")
 }
+
