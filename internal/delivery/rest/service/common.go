@@ -44,7 +44,33 @@ func NewCommonService(app *app.WeebinarApp) *CommonService {
 }
 
 func (s *CommonService) IndexHandler(c echo.Context) error {
-	return c.Render(http.StatusOK, "index", nil)
+	// Check Session
+	sess, err := session.Get("session", c)
+	if err != nil {
+		return c.Redirect(http.StatusMovedPermanently, "/")
+	}
+
+	// Check if user session exist
+	role, ok := sess.Values["role"]
+	if !ok {
+		return c.Render(http.StatusOK, "index", nil)
+	} else {
+		url := role.(string) + "/home"
+		return c.Redirect(http.StatusMovedPermanently, url)
+	}
+}
+
+func (s *CommonService) SignOutHandler(c echo.Context) error {
+	sess, _ := session.Get("session", c)
+	sess.Options = &sessions.Options{
+		Path:     "/",
+		MaxAge:   -1,
+		HttpOnly: true,
+	}
+
+	sess.Save(c.Request(), c.Response())
+
+	return c.Redirect(http.StatusMovedPermanently, "/")
 }
 
 func (s *CommonService) TeacherSignInHandler(c echo.Context) error {
@@ -61,19 +87,19 @@ func (s *CommonService) TeacherSignInCallbackHandler(c echo.Context) error {
 	userBytes, err := s.oAuthCallback(c, role)
 	if err != nil {
 		log.Printf("[CommonService][TeacherSignInCallbackHandler] error executing oAuthCallback: %+v\n", err)
-		return c.Redirect(http.StatusTemporaryRedirect, "/")
+		return c.Redirect(http.StatusMovedPermanently, "/")
 	}
 
 	err = json.Unmarshal(userBytes, &user)
 	if err != nil {
 		log.Printf("[CommonService][TeacherSignInCallbackHandler] error unmarshal response content: %+v\n", err)
-		return c.Redirect(http.StatusTemporaryRedirect, "/")
+		return c.Redirect(http.StatusMovedPermanently, "/")
 	}
 
 	teacher.ID, err = strconv.ParseInt(user.ID, 10, 64)
 	if err == nil {
 		fmt.Printf("[CommonService][TeacherSignInCallbackHandler] error converting id from string to int64: %+v\n", err)
-		return c.Redirect(http.StatusTemporaryRedirect, "/")
+		return c.Redirect(http.StatusMovedPermanently, "/")
 	}
 	teacher.Email = user.Email
 	teacher.Name = user.Name
@@ -84,7 +110,7 @@ func (s *CommonService) TeacherSignInCallbackHandler(c echo.Context) error {
 		err = s.teacherUC.TeacherSignUp(teacher)
 		if err != nil {
 			log.Printf("[CommonService][TeacherSignInCallbackHandler] error creating new user: %+v\n", err)
-			return c.Redirect(http.StatusTemporaryRedirect, "/")
+			return c.Redirect(http.StatusMovedPermanently, "/")
 		}
 	}
 	s.createSession(c, teacher.ID, teacher.Email, role)
@@ -106,19 +132,19 @@ func (s *CommonService) StudentSignInCallbackHandler(c echo.Context) error {
 	userBytes, err := s.oAuthCallback(c, role)
 	if err != nil {
 		log.Printf("[CommonService][StudentSignInCallbackHandler] error executing oAuthCallback: %+v\n", err)
-		return c.Redirect(http.StatusTemporaryRedirect, "/")
+		return c.Redirect(http.StatusMovedPermanently, "/")
 	}
 
 	err = json.Unmarshal(userBytes, &user)
 	if err != nil {
 		log.Printf("[CommonService][StudentSignInCallbackHandler] error unmarshal response content: %+v\n", err)
-		return c.Redirect(http.StatusTemporaryRedirect, "/")
+		return c.Redirect(http.StatusMovedPermanently, "/")
 	}
 
 	student.ID, err = strconv.ParseInt(user.ID, 10, 64)
 	if err == nil {
 		fmt.Printf("[CommonService][StudentSignInCallbackHandler] error converting id from string to int64: %+v\n", err)
-		return c.Redirect(http.StatusTemporaryRedirect, "/")
+		return c.Redirect(http.StatusMovedPermanently, "/")
 	}
 	student.Email = user.Email
 	student.Name = user.Name
@@ -129,7 +155,7 @@ func (s *CommonService) StudentSignInCallbackHandler(c echo.Context) error {
 		err = s.studentUC.StudentSignUp(student)
 		if err != nil {
 			log.Printf("[CommonService][StudentSignInCallbackHandler] error creating new user: %+v\n", err)
-			return c.Redirect(http.StatusTemporaryRedirect, "/")
+			return c.Redirect(http.StatusMovedPermanently, "/")
 		}
 	}
 	s.createSession(c, student.ID, student.Email, role)
@@ -165,30 +191,6 @@ func (s *CommonService) oAuthCallback(c echo.Context, role string) ([]byte, erro
 	}
 
 	return content, nil
-
-	/*
-		if role == "teacher" {
-			var teacher entity.Teacher
-			err = json.Unmarshal(content, &teacher)
-			if err != nil {
-				log.Printf("[CommonService][oAuthCallback] error unmarshal response content: %+v\n", err)
-				return nil, c.Redirect(http.StatusTemporaryRedirect, "/")
-			}
-			s.createSession(c, teacher.ID, teacher.Email, role)
-			return c.Redirect(http.StatusMovedPermanently, fmt.Sprintf("/%s/home", role))
-		} else if role == "student" {
-			var student entity.Student
-			err = json.Unmarshal(content, &student)
-			if err != nil {
-				log.Printf("[CommonService][oAuthCallback] error unmarshal response content: %+v\n", err)
-				return c.Redirect(http.StatusTemporaryRedirect, "/")
-			}
-			s.createSession(c, student.ID, student.Email, role)
-			return c.Redirect(http.StatusMovedPermanently, fmt.Sprintf("/%s/home", role))
-		}
-
-		fmt.Fprintf(w, "Response: %s", content)
-	*/
 }
 
 func (s *CommonService) createSession(c echo.Context, id int64, email string, role string) {
@@ -204,4 +206,12 @@ func (s *CommonService) createSession(c echo.Context, id int64, email string, ro
 	sess.Values["role"] = role
 
 	sess.Save(c.Request(), c.Response())
+}
+
+func Logout(c echo.Context) error {
+	return c.Redirect(http.StatusMovedPermanently, "/logout")
+}
+
+func BackToHome(c echo.Context) error{
+	return c.Redirect(http.StatusMovedPermanently, "/")
 }
