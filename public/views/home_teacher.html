@@ -10,7 +10,7 @@
         <div class="container mt-4">
             <div class="row mb-3 ">
                 <div class="col ">
-                    <h2 class="mr-md-auto">Hello, username!</h2>
+                    <h2 class="mr-md-auto">Hello, {{.teacher.Name}}!</h2>
                 </div>
             </div>
             <div class="row ">
@@ -23,42 +23,21 @@
                     <div class="content content-settings bg-light zoom center py-4" style="width: auto;">
                         <img class="create-img mb-4" src="/assets/images/add.png" alt="Card image cap">
                         <a class="text-dark h5 stretched-link" href="" data-toggle="modal"
-                            data-target="#createWebinarModal"> Create a Webinar</a>
+                            data-target="#createWebinarModal">Create a Webinar</a>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
-                    <div class="content content-settings zoom" style="width: auto;">
-                        <img class="card-img-top" src="/assets/images/4253128.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Webinar 1</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the card's content.</p>
-                            <a href="/detail" class="btn btn-dark mt-2">Show Details</a>
+                {{range .webinars}}
+                    <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
+                        <div class="content content-settings zoom" style="width: auto;">
+                            <img class="card-img-top" src="/assets/images/4253128.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{.Title}}</h5>
+                                <p class="card-text">{{.Desc}}</p>
+                                <a href= "/teacher/webinar/{{.ID}}" class="btn btn-dark mt-2">Show Details</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
-                    <div class="content content-settings zoom" style="width: auto;">
-                        <img class="card-img-top" src="/assets/images/4253128.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Webinar 2</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the card's content.</p>
-                            <a href="#" class="btn btn-dark mt-2">Show Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
-                    <div class="content content-settings zoom" style="width: auto;">
-                        <img class="card-img-top" src="/assets/images/4253128.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Webinar 3</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the card's content.</p>
-                            <a href="#" class="btn btn-dark mt-2">Show Details</a>
-                        </div>
-                    </div>
-                </div>
+                {{end}}
             </div>
         </div>
         <!-- Create a Webinar Modal -->
