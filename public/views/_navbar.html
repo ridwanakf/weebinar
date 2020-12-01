@@ -1,37 +1,41 @@
 {{define "_navbar"}}
-<nav class="navbar py-3 navbar-light border-bottom">
-    <a class="ml-5 navbar-brand" href="/home">Weebinar</a>
-    <form class="d-flex d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-        <div class="input-group">
-            <input type="text" class="form-control border small" placeholder="Search for...">
-            <div class="input-group-append">
-                <button class="btn btn-dark" type="button">Search</button>
+<div
+    class="d-flex flex-column flex-md-row flex-lg-row p-2 px-md-4 bg-white border-bottom">
+    <nav class="navbar my-0 mr-sm-auto mr-md-auto mr-lg-auto h1">
+        <a class="navbar-brand" href="/teacher/home">Weebinar</a>
+        <form class="navbar-search mr-sm-auto mr-md-auto mr-lg-auto">
+            <div class="input-group">
+                <input type="text" class="form-control border small" placeholder="Search for...">
+                <div class="input-group-append">
+                    <button class="btn btn-dark" type="button"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+    </nav>
+    <nav class="navbar my-2 my-md-0 ">
+        <!--Notification Dropdown-->
+        <div class="dropdown">
+            <button onclick="notificationDropdown()" class="dropbtn">Notification
+                <i class="dropdown-icon fas fa-bell ml-1"></i>
+            </button>
+            <div id="notifDropdown" class="dropdown-content">
+                <a href="#">ahhjajhksadjhksdhjjashdjhkdaajkhdjsahkdjsahjdsahasjash</a>
             </div>
         </div>
-    </form>
-    <!--Notification Dropdown-->
-    <div class="dropdown mr-3">
-        <button onclick="notificationDropdown()" class="dropbtn">Notification
-            <i class="dropdown-icon fas fa-bell ml-1"></i>
-        </button>
-        <div id="notifDropdown" class="dropdown-content">
-            <a href="#">ahhjajhksadjhksdhjjashdjhkdaajkhdjsahkdjsahjdsahasjash</a>
+        <!--Username Dropdown-->
+        <div class="dropdown ">
+            <button onclick="usernameDropdown()" class="dropbtn">Username
+                <i class="dropdown-icon fas fa-angle-down ml-1"></i>
+            </button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="/teacher/profile">Your Account</a>
+                <a href="#" data-toggle="modal" data-target="#signOutModal">Sign Out</a>
+            </div>
         </div>
-    </div>
-    <!--Username Dropdown-->
-    <div class="dropdown mr-5">
-        <button onclick="usernameDropdown()" class="dropbtn">Username
-            <i class="dropdown-icon fas fa-angle-down ml-1"></i>
-        </button>
-        <div id="myDropdown" class="dropdown-content">
-            <a href="/settings">Your Account</a>
-            <a href="#" data-toggle="modal" data-target="#signOutModal">Sign Out</a>
-        </div>
-    </div>
-</nav>
+
+</div>
 <!-- Sign Out Modal -->
-<div class="modal fade" id="signOutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="signOutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -93,7 +97,7 @@
             }
         }
     }
-        
+
     //sign out modal
     $('#signOutModal').on('shown.bs.modal', function () {
         $('#myInput').trigger('focus')

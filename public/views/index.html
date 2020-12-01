@@ -17,16 +17,21 @@
             </div>
             <div class="col-lg-5 col-md-5">
                 <div class="content content-settings mx-lg-0 mx-md-0 mx-3 mt-lg-0 mt-md-0 mt-5 py-5 px-4">
-                    <h4 class="center text-dark mb-4"><b><u>Sign In or Sign Up</u></b></h4>
-                    <form action="POST" action="">
-                      <a href="" class="btn btn-dark btn-block mb-2">
-                          <i class="fab fa-google fa-fw"></i> Sign In with Google
-                      </a>
-                      <p class="center">or</p>
-                      <a href="/role" class="btn btn-dark btn-block">
-                          <i class="fab fa-google fa-fw"></i> Sign Up with Google
-                      </a>
-                    </form>  
+                    <!-- <h4 class="center text-dark mb-4"><b><u>Sign In or Sign Up</u></b></h4> -->
+                    <h4 class="center">
+                        Sign in with Google
+                        <!-- <i class="fab fa-google fa-fw ml-2"></i> -->
+                    </h4>
+                    <p class="text-center mb-4"><small>Doesn't have a Google account? You can create one <a href="https://accounts.google.com/signup" rel="noopener noreferrer" target="_blank">here</a>.</small></p>
+                    <form action="/teacher/login" method="POST">
+                      <input type="submit" class="btn btn-dark btn-block mb-2" value="Sign In as Teacher">
+                        <!-- <i class="fas fa-chalkboard-teacher"></i> Sign In as Teacher -->
+                    </form>
+                    <p class="center">or</p>
+                    <form action="/student/login" method="POST">
+                        <input type="submit" class="btn btn-dark btn-block" value="Sign In as Student">
+                          <!-- <i class="fas fa-user-graduate"></i> Sign In as Student  -->
+                    </form>
                 </div>
             </div>
         </div>
