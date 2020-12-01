@@ -1,41 +1,62 @@
 {{define "index"}}
 <html lang="en">
+
 <head>
     <title>{{.title}}</title>
     {{template "_header"}}
-</head>    
-<body class="index">
-    <div class="container mt-lg-5 py-lg-5 mt-md-5 py-md-5">
-        <div class="row mt-lg-5 mt-md-5">
-            <div class="col-lg-7 col-md-7">
-                <div class="content mx-lg-0 mx-md-0 mx-3 my-lg-0 my-3">
-                    <h1 class="display-2  pt-lg-5 pt-md-5" style="color: #ffffff;"><b>Weebinar</b></h1>
-                    <h4 class="lead" style="color: #ffffff;">
-                        Create and Share Webinars :)
-                    </h4>    
+</head>
+
+<body style="background: #373B44;">
+    <div class="container">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block text-center p-5" style="border-right:1px solid #ccc">                            
+                                <img src="/assets/images/webinar.jpg" alt="" style="width:400px; height:250px">
+                                <h1>Weebinar</h1>
+                                <p><small>A webinar sharing platform. 
+                                    <br>
+                                    For teachers: you can create and share your webinar <br>
+                                    For students: you can
+                                    attend webinars and get the latest informations of your webinars.</small></p>
+                            </div>
+                            <div class="col-lg-6 py-5">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h5>
+                                            <i class="fab fa-google fa-fw ml-2"></i>
+                                            Sign In with Google</h5>
+                                        <p><small>Doesn't have a Google account? <br> You can create one <a
+                                            href="https://accounts.google.com/signup" rel="noopener noreferrer"
+                                            target="_blank">here</a>.</small></p>        
+                                    </div>
+                                    <form action="/teacher/login" method="POST">
+                                        <input type="submit" class="btn btn-dark btn-block mb-2" value="Sign In as Teacher">
+                                        <!-- <i class="fas fa-chalkboard-teacher"></i> Sign In as Teacher -->
+                                    </form>
+                                    <p class="center"><small>or</small></p>
+                                    <form action="/student/login" method="POST">
+                                        <input type="submit" class="btn btn-dark btn-block" value="Sign In as Student">
+                                        <!-- <i class="fas fa-user-graduate"></i> Sign In as Student  -->
+                                    </form>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
-            <div class="col-lg-5 col-md-5">
-                <div class="content content-settings mx-lg-0 mx-md-0 mx-3 mt-lg-0 mt-md-0 mt-5 py-5 px-4">
-                    <!-- <h4 class="center text-dark mb-4"><b><u>Sign In or Sign Up</u></b></h4> -->
-                    <h4 class="center">
-                        Sign in with Google
-                        <!-- <i class="fab fa-google fa-fw ml-2"></i> -->
-                    </h4>
-                    <p class="text-center mb-4"><small>Doesn't have a Google account? You can create one <a href="https://accounts.google.com/signup" rel="noopener noreferrer" target="_blank">here</a>.</small></p>
-                    <form action="/teacher/login" method="POST">
-                      <input type="submit" class="btn btn-dark btn-block mb-2" value="Sign In as Teacher">
-                        <!-- <i class="fas fa-chalkboard-teacher"></i> Sign In as Teacher -->
-                    </form>
-                    <p class="center">or</p>
-                    <form action="/student/login" method="POST">
-                        <input type="submit" class="btn btn-dark btn-block" value="Sign In as Student">
-                          <!-- <i class="fas fa-user-graduate"></i> Sign In as Student  -->
-                    </form>
-                </div>
-            </div>
+
         </div>
+
     </div>
+    
 </body>
+
 </html>
 {{end}}
