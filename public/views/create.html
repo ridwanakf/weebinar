@@ -10,7 +10,7 @@
 <head>
 </head>
 
-<body>
+<body class="sess">
     {{template "_navbar"}}
     <!-- {{template "_message"}}
         <p>Page: Index</p>
@@ -25,53 +25,49 @@
                             Create a Webinar
                         </b></div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <label for="">Title of Webinar</label>
-                                <input type="text" name="" id="" class="form-control">
+                        <form action="" method="POST">
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="">Title of Webinar</label>
+                                    <input type="text" name="title" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="">Date and Time</label>
-                                <input type="datetime-local" name="" id="" class="form-control">
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="">Category</label>
+                                    <select class="form-control" name="category" id="">
+                                        <option>Science</option>
+                                        <option>Social</option>
+                                        <option>Literature</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="">Link</label>
-                                <input type="text" name="" id="" class="form-control">
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="">Description</label>
+                                    <textarea type="text" name="description" class="form-control"> </textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="">Category</label>
-                                <input type="text" name="" id="" class="form-control">
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="">Schedule</label>
+                                    <input type="datetime-local" name="schedule" id="" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="">Description</label>
-                                <textarea type="text" name="" id="" class="form-control"> </textarea>
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="">Link</label>
+                                    <input type="text" name="link" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="">Insert Webinar's Poster</label>
-                                <input type="file" id="" class=""
-                                    accept="image/png, image/jpeg, image/jpg"></input>
-                                <p><small>*Allowed files: JPG, JPEG, PNG</small></p>
+                            <div class="row">
+                                <div class="col d-flex justify-content-end ">
+                                    <form action="/webinar/create" method="POST">
+                                        <input type="submit" class="btn btn-dark mt-3" value="Create a Webinar">
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col d-flex justify-content-end ">
-                                <button class="btn btn-dark mt-3">Update</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
