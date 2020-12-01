@@ -19,7 +19,7 @@ func NewTeacherService(app *app.WeebinarApp) *TeacherService {
 }
 
 func (s *TeacherService) HomeTeacherPageHandler(c echo.Context) error {
-	return c.Render(http.StatusOK, "home", nil)
+	return c.Render(http.StatusOK, "home_teacher", nil)
 }
 
 func (s *TeacherService) ProfileTeacherPageHandler(c echo.Context) error {
