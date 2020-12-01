@@ -31,15 +31,15 @@ func NewCommonService(app *app.WeebinarApp) *CommonService {
 		teacherUC: app.UseCases.TeacherUC,
 		studentUC: app.UseCases.StudentUC,
 		googleOauthConfig: &oauth2.Config{
-			ClientID: "601884508454-5709uiog1uheptue8klgn39qfk2h67un.apps.googleusercontent.com",
-			ClientSecret: "h0DEhm3Sagbv3NzxFFjYKSme",			
+			ClientID:     app.Cfg.OAuth.ClientID,
+			ClientSecret: app.Cfg.OAuth.ClientSecret,
 			Endpoint:     google.Endpoint,
 			Scopes: []string{
 				"https://www.googleapis.com/auth/userinfo.email",
 				"https://www.googleapis.com/auth/userinfo.profile",
 			},
 		},
-		oAuthRandomState: "string bebas",
+		oAuthRandomState: app.Cfg.OAuth.RandomState,
 	}
 }
 

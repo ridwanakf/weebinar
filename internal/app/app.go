@@ -5,7 +5,7 @@ import (
 	"github.com/ridwanakf/weebinar/internal/app/config"
 	"os"
 
-	// "github.com/caarlos0/env/v6"
+	"github.com/caarlos0/env/v6"
 	"github.com/pkg/errors"
 	"gopkg.in/yaml.v2"
 )
@@ -67,9 +67,9 @@ func readConfig(cfgPath string) (config.Config, error) {
 	}
 
 	// Replace vars that exist in ENV
-	// if err := env.Parse(&cfg); err != nil {
-	// 	return config.Config{}, errors.Wrapf(err, "error reading config from ENV")
-	// }
+	if err := env.Parse(&cfg); err != nil {
+		return config.Config{}, errors.Wrapf(err, "error reading config from ENV")
+	}
 
 	return cfg, nil
 }
