@@ -1,73 +1,81 @@
 {{define "home_teacher"}}
-<!DOCTYPE html>
-<html>
+    <!DOCTYPE html>
+    <html>
     <head>
         <title>{{.title}}</title>
         {{template "_header"}}
     </head>
     <body class="sess">
-        {{template "_navbar"}}
-        <div class="container mt-4">
-            <div class="row mb-3 ">
-                <div class="col ">
-                    <h2 class="mr-md-auto">Hello, {{.teacher.Name}}!</h2>
+    {{template "_navbar"}}
+    <div class="container mt-4">
+        <div class="row mb-3 ">
+            <div class="col ">
+                <h2 class="mr-md-auto">Hello, {{.teacher.Name}}!</h2>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col d-flex flex-column flex-lg-row">
+                <h4 class="mr-md-auto mb-2">Your Webinars</h4>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
+                <div class="content content-settings bg-light zoom center py-4" style="width: auto;">
+                    <img class="create-img mb-4" src="/assets/images/add.png" alt="Card image cap">
+                    <a class="text-dark h5 stretched-link" href="" data-toggle="modal"
+                       data-target="#createWebinarModal">Create a Webinar</a>
                 </div>
             </div>
-            <div class="row ">
-                <div class="col d-flex flex-column flex-lg-row">
-                    <h4 class="mr-md-auto mb-2">Your Webinars</h4>
-                </div>
-            </div>
-            <div class="row mb-5">
+            {{range .webinars}}
                 <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
-                    <div class="content content-settings bg-light zoom center py-4" style="width: auto;">
-                        <img class="create-img mb-4" src="/assets/images/add.png" alt="Card image cap">
-                        <a class="text-dark h5 stretched-link" href="" data-toggle="modal"
-                            data-target="#createWebinarModal">Create a Webinar</a>
-                    </div>
-                </div>
-                {{range .webinars}}
-                    <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
-                        <div class="content content-settings zoom" style="width: auto;">
-                            <img class="card-img-top" src="/assets/images/4253128.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">{{.Title}}</h5>
-                                <p class="card-text">{{.Desc}}</p>
-                                <a href= "/teacher/webinar/{{.ID}}" class="btn btn-dark mt-2">Show Details</a>
-                            </div>
-                        </div>
-                    </div>
-                {{end}}
-            </div>
-        </div>
-        <!-- Create a Webinar Modal -->
-        <div class="modal fade" id="createWebinarModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <p class="modal-title" id="exampleModalLongTitle">Webinar Platform Choices</p>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid" style="margin-bottom: 0.75rem;">
-                            <div class="row h5 center mb-4">
-                                What platform do you want to use?
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <a class="btn btn-block text-white" style="background-color: #0E71EB" href="/teacher/create">Zoom</a>
-                                </div>
-                                <div class="col-6">
-                                    <a class="btn btn-block text-white" style="background-color: #6264a7" href="/teacher/create">Teams</a>
-                                </div>
-                            </div>
+                    <div class="content content-settings zoom" style="width: auto;">
+                        <img class="card-img-top" src="/assets/images/4253128.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{.Title}}</h5>
+                            <p class="card-text">{{.Desc}}</p>
+                            <form action="/teacher/webinar/{{.ID}}" method="get">
+                                <input type="submit" class="btn btn-dark mt-2" value="Show Details"/>
+                            </form>
                         </div>
                     </div>
                 </div>
+            {{end}}
+        </div>
+    </div>
+    <!-- Create a Webinar Modal -->
+    <div class="modal fade" id="createWebinarModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="modal-title" id="exampleModalLongTitle">Webinar Platform Choices</p>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid" style="margin-bottom: 0.75rem;">
+                        <div class="row h5 center mb-4">
+                            What platform do you want to use?
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <form action="/teacher/webinar/create" method="get">
+                                    <input type="submit" class="btn btn-block text-white"
+                                           style="background-color: #0E71EB" value="Zoom"/>
+                                </form>
+                            </div>
+                            <div class="col-6">
+                                <form action="/teacher/webinar/create" method="get">
+                                    <input type="submit" class="btn btn-block text-white"
+                                           style="background-color: #6264a7" value="Teams"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
     </body>
-</html>
+    </html>
 {{end}}
