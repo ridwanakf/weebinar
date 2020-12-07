@@ -17,7 +17,7 @@
                         <div class="card">
                             <img class="card-img-top" src="/assets/images/4253128.jpg" alt="Card image cap">
                             <div class="card-body">
-                                <div class="h2">{{.webinar.Title}}</div>
+                                <div class="h4">{{.webinar.Title}}</div>
                                 <div class="card-text">
                                     {{.webinar.Desc}}
                                 </div>
@@ -28,14 +28,11 @@
                         <div class="card mb-4">
                             <div class="card-body">
                                 <h5 class="card-title">Webinar Details</h5>
-                                <p class="card-text">Date: </p>{{.webinar.Schedule}}
+                                <p class="card-text">Date: </p>22 Dec 20 16:00
                                 <br>
                                 <p class="card-text">Category: </p>{{.webinar.Category}} <br>
-                                <p class="card-text">Teacher: </p>{{.teacher.Name}}
-                                <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a> -->
+                                <p class="card-text">Teacher: </p>{{.name}}<br>
+                                <p class="card-text">Meeting Link: </p>{{.webinar.Link}}
                             </div>
                         </div>
                         <div class="card mb-4">
@@ -69,34 +66,6 @@
                                         </div>    
                                     </div>
                                 </div> -->
-                            </div>
-                        </div>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">Announcements</h5>
-                                <div class="row mb-2">
-                                    <div class="col-12">
-                                        <small id="date" class="text-secondary" style="margin: 0;">
-                                            <script>
-                                                document.getElementById("date").innerHTML = Date();
-                                            </script>
-                                            <div class="card-title">
-                                                This is an announcement
-                                            </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <form action="" method="POST">
-                                            <div class="form-group">
-                                                <textarea class="form-control" id="announcement" name="announcement"
-                                                    cols="30" rows="4"
-                                                    placeholder="Write an announcement here..."></textarea>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn btn-dark btn-block">Announce</button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

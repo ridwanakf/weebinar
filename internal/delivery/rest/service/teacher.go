@@ -86,12 +86,10 @@ func (s *TeacherService) CreateWebinarPostHandler(c echo.Context) error {
 	_, err = s.uc.CreateNewWebinar(id, webinarParam)
 	if err != nil {
 		log.Printf("[TeacherService][CreateWebinarPostHandler] error creating new webinar: %+v\n", err)
-		// TODO: render failed page
-		return c.Render(http.StatusOK, "", nil)
+		return c.Render(http.StatusOK, "create_failed", nil)
 	}
 
-	// TODO: render thank you page
-	return c.Render(http.StatusOK, "", nil)
+	return c.Render(http.StatusOK, "create_success", nil)
 }
 
 func (s *TeacherService) WebinarDetailPageHandler(c echo.Context) error {
