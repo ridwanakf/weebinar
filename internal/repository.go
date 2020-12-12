@@ -6,7 +6,8 @@ type TeacherRepo interface {
 	IsUserExist(id int64) error
 	InsertNewUser(teacher entity.Teacher) error
 	GetProfile(id int64) (entity.Teacher, error)
-	ApproveWaitingList(studentID int64, webinarID int64) error
+	ApproveWaitingList(id int64, studentID int64, webinarID int64) error
+	RejectWaitingList(id int64, studentID int64, webinarID int64) error
 }
 
 type StudentRepo interface {
