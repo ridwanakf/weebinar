@@ -113,7 +113,7 @@ func (s *CommonService) TeacherSignInCallbackHandler(c echo.Context) error {
 			return c.Redirect(http.StatusMovedPermanently, "/")
 		}
 	}
-	s.createSession(c, teacher.ID, teacher.Email, role)
+	s.createSession(c, teacher.ID, teacher.Name, teacher.Email, role)
 
 	return c.Redirect(http.StatusMovedPermanently, fmt.Sprintf("/%s/home", role))
 }
@@ -158,7 +158,7 @@ func (s *CommonService) StudentSignInCallbackHandler(c echo.Context) error {
 			return c.Redirect(http.StatusMovedPermanently, "/")
 		}
 	}
-	s.createSession(c, student.ID, student.Email, role)
+	s.createSession(c, student.ID, student.Name, student.Email, role)
 
 	return c.Redirect(http.StatusMovedPermanently, fmt.Sprintf("/%s/home", role))
 }
@@ -193,7 +193,7 @@ func (s *CommonService) oAuthCallback(c echo.Context, role string) ([]byte, erro
 	return content, nil
 }
 
-func (s *CommonService) createSession(c echo.Context, id int64, email string, role string) {
+func (s *CommonService) createSession(c echo.Context, id int64, name string, email string, role string) {
 	sess, _ := session.Get("session", c)
 	sess.Options = &sessions.Options{
 		Path:     "/",
@@ -202,6 +202,7 @@ func (s *CommonService) createSession(c echo.Context, id int64, email string, ro
 	}
 
 	sess.Values["id"] = id
+	sess.Values["name"] = name
 	sess.Values["email"] = email
 	sess.Values["role"] = role
 

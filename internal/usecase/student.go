@@ -34,15 +34,15 @@ func (t *StudentUsecase) GetWebinarByID(id int64) (entity.Webinar, error) {
 	panic("implement me")
 }
 
-func (s *StudentUsecase) EnrollWebinar(id int64, param entity.EnrollWebinarParam) error {
+func (s *StudentUsecase) EnrollWebinar(studentID int64, param entity.EnrollWebinarParam) error {
 	panic("implement me")
 }
 
-func (s *StudentUsecase) GetAllRegisteredWebinar(id int64) ([]entity.Webinar, error) {
+func (s *StudentUsecase) GetAllRegisteredWebinar(studentID int64) ([]entity.Webinar, error) {
 	panic("implement me")
 }
 
-func (s *StudentUsecase) CancelEnrollmentWebinar(id int64, param entity.CancelEnrollmentWebinarParam) error {
+func (s *StudentUsecase) CancelEnrollmentWebinar(studentID int64, param entity.CancelEnrollmentWebinarParam) error {
 	panic("implement me")
 }
 

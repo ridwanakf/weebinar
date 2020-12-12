@@ -7,7 +7,7 @@ type TeacherUC interface {
 	TeacherSignUp(teacher entity.Teacher) error
 	GetTeacherProfile(id int64) (entity.Teacher, error)
 
-	GetAllWebinar(id int64) ([]entity.Webinar, error)
+	GetAllWebinar(teacherID int64) ([]entity.Webinar, error)
 	GetWebinarByID(id int64) (entity.Webinar, error)
 	CreateNewWebinar(id int64, param entity.CreateWebinarParam) (entity.Webinar, error)
 	UpdateWebinar(id int64, param entity.UpdateWebinarParam) error
@@ -23,7 +23,7 @@ type StudentUC interface {
 
 	SearchWebinarBySlug(slug string) ([]entity.Webinar, error)
 	GetWebinarByID(id int64) (entity.Webinar, error)
-	EnrollWebinar(id int64, param entity.EnrollWebinarParam) error
-	GetAllRegisteredWebinar(id int64) ([]entity.Webinar, error)
-	CancelEnrollmentWebinar(id int64, param entity.CancelEnrollmentWebinarParam) error
+	EnrollWebinar(studentID int64, param entity.EnrollWebinarParam) error
+	GetAllRegisteredWebinar(studentID int64) ([]entity.Webinar, error)
+	CancelEnrollmentWebinar(studentID int64, param entity.CancelEnrollmentWebinarParam) error
 }

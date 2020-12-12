@@ -44,3 +44,15 @@ type UpdateWebinarParam struct {
 type DeleteWebinarParam struct {
 	ID int64 `json:"id" db:"id"`
 }
+
+func (c CreateWebinarParam) Validate() error {
+	return nil
+}
+
+func (u UpdateWebinarParam) Validate() error {
+	return nil
+}
+
+func (d DeleteWebinarParam) Validate() error {
+	return nil
+}
