@@ -11,7 +11,7 @@ type Usecases struct {
 	StudentUC internal.StudentUC
 }
 
-func newUsecases(repos *Repos, gateway *Gateways, cfg *config.Config) *Usecases {
+func newUsecases(repos *Repos, cfg config.Config) *Usecases {
 	return &Usecases{
 		TeacherUC: usecase.NewTeacherUsecase(repos.TeacherRepo, repos.WebinarRepo),
 		StudentUC: usecase.NewStudentUsecase(repos.StudentRepo, repos.WebinarRepo),

@@ -3,3 +3,9 @@ server:
   debug: true
   read_timeout_seconds: 10
   write_timeout_seconds: 5
+
+database:
+  driver: "postgres"
+  address: "postgres://postgres:postgres@localhost:5432/weebinar?sslmode=disable"
+  max_conns: 3000
+  max_idle_conns: 1000
