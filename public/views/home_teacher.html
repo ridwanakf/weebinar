@@ -1,11 +1,13 @@
 {{define "home_teacher"}}
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>{{.title}}</title>
-        {{template "_header"}}
-    </head>
-    <body class="sess">
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{.title}}</title>
+    {{template "_header"}}
+</head>
+
+<body class="sess">
     {{template "_navbar"}}
     <div class="container mt-4">
         <div class="row mb-3 ">
@@ -20,26 +22,74 @@
         </div>
         <div class="row mb-5">
             <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
-                <div class="content content-settings bg-light zoom center py-4" style="width: auto;">
+                <div class="content content-settings zoom center py-4" style="width: auto;">
                     <img class="create-img mb-4" src="/assets/images/add.png" alt="Card image cap">
                     <a class="text-dark h5 stretched-link" href="" data-toggle="modal"
-                       data-target="#createWebinarModal">Create a Webinar</a>
+                        data-target="#createWebinarModal">Create a Webinar</a>
                 </div>
             </div>
             {{range .webinars}}
-                <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
-                    <div class="content content-settings zoom" style="width: auto;">
-                        <img class="card-img-top" src="/assets/images/4253128.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">{{.Title}}</h5>
-                            <p class="card-text">{{.Desc}}</p>
-                            <form action="/teacher/webinar/{{.ID}}" method="get">
-                                <input type="submit" class="btn btn-dark mt-2" value="Show Details"/>
-                            </form>
+            <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
+                <div class="content content-settings zoom" style="width: auto;">
+                    <!-- <img class="card-img-top" src="/assets/images/nasa-Q1p7bh3SHj8-unsplash.jpg"> -->
+                    <!-- <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg"> -->
+                    <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg"
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{.Title}}</h5>
+                        <div class="card-text text-secondary">
+                            <div class="clip-context">
+                                {{.Desc}}
+                            </div>
                         </div>
+                        <script>
+                            $(document).ready(function () {
+                                for (let c of $("div.clip-context")) {
+                                    if ($(c).innerHeight() >= 95) {
+                                        $(c).text($(c).text().substr(0, 170));
+                                        $(c).append(" ...");
+                                    }
+                                }
+                            });
+                        </script>
+                        <form action="/teacher/webinar/{{.ID}}" method="get">
+                            <input type="submit" class="btn btn-dark mt-2" value="Show Details" />
+                        </form>
                     </div>
                 </div>
+            </div>
             {{end}}
+            <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
+                <div class="content content-settings zoom" style="width: auto;">
+                    <img class="card-img-top" src="/assets/images/nasa-Q1p7bh3SHj8-unsplash.jpg">
+                    <!-- <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg"> -->
+                    <!-- <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg" -->
+                    <div class="card-body">
+                        <h5 class="card-title">Test judul</h5>
+                        <div class="card-text text-secondary">
+                            <div class="clip-context">
+                                Test deskripsi Test deskripsiTest deskripsiTest deskripsiTest deskripsiTest
+                                deskripsiTest deskripsiTest deskripsiTest deskripsiTest deskripsiTest deskripsiTest
+                                deskripsiTest deskripsiTest deskripsiTest deskripsiTest deskripsiTest deskripsiTest
+                                deskripsiTest deskripsiTest deskripsi
+                            </div>
+                        </div>
+                        <script>
+                            $(document).ready(function () {
+                                for (let c of $("div.clip-context")) {
+                                    if ($(c).innerHeight() >= 95) {
+                                        $(c).text($(c).text().substr(0, 170));
+                                        $(c).append(" ...");
+                                    }
+                                }
+                            });
+                        </script>
+                        <form action="/teacher/webinar/{{.ID}}" method="get">
+                            <input type="submit" class="btn btn-dark mt-2" value="Show Details" />
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- Create a Webinar Modal -->
@@ -61,13 +111,13 @@
                             <div class="col-6">
                                 <form action="/teacher/webinar/create" method="get">
                                     <input type="submit" class="btn btn-block text-white"
-                                           style="background-color: #0E71EB" value="Zoom"/>
+                                        style="background-color: #0E71EB" value="Zoom" />
                                 </form>
                             </div>
                             <div class="col-6">
                                 <form action="/teacher/webinar/create" method="get">
                                     <input type="submit" class="btn btn-block text-white"
-                                           style="background-color: #6264a7" value="Teams"/>
+                                        style="background-color: #6264a7" value="Teams" />
                                 </form>
                             </div>
                         </div>
@@ -76,6 +126,7 @@
             </div>
         </div>
     </div>
-    </body>
-    </html>
+</body>
+
+</html>
 {{end}}

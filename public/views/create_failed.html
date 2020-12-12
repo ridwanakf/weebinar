@@ -10,10 +10,23 @@
 <body class="sess">
     {{template "_navbar"}}
     <div class="container mt-4">
-        <div class="card">
-            <div class="card-body">
-                <img src="/assets/images/failed.png" alt="" class="img-center">
+        <div class="row py-5">
+            <div class="col"></div>
+            <div class="col-5">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="/assets/images/failed.png" alt="" class="img-center">
+                        <div class="text-center">
+                            <h1>Oops!</h1>
+                            <p>Something went wrong</p>
+                            <form action="/teacher/webinar/create" method="get">
+                                <button type="submit" class="btn btn-danger">Try Again</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>        
             </div>
+            <div class="col"></div>
         </div>
     </div>
 </body>

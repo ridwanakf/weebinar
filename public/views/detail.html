@@ -15,7 +15,9 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-8 mb-3">
                         <div class="card">
-                            <img class="card-img-top" src="/assets/images/4253128.jpg" alt="Card image cap">
+                            <img class="card-img-top" src="/assets/images/nasa-Q1p7bh3SHj8-unsplash.jpg">
+                            <!-- <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg"> -->
+                            <!-- <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg" -->
                             <div class="card-body">
                                 <div class="h4">{{.webinar.Title}}</div>
                                 <div class="card-text">
@@ -39,42 +41,20 @@
                             <div class="card-body">
                                 <h5 class="card-title">Participants</h5>
                                 {{ range .participants}}
-                                    <div class="mb-2">
-                                        <div class="row">
-                                            <div class="col-6">{{.Name}}</div>
-                                            <div class="col-6">
-                                                <div class="btn btn-success">{{.Status}}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {{end}}
-                                <!-- <div class="mb-2">
+                                <div class="mb-2">
                                     <div class="row">
-                                        <div class="col-6">Apoy</div>
+                                        <div class="col-6">{{.Name}}</div>
                                         <div class="col-6">
-                                            <div class="btn btn-success">Approved</div>
+                                            <!-- <div class="btn btn-warning">Requested</div> -->
+                                            <div class="btn btn-success">{{.Status}}</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mb-2">
-                                    <div class="row">
-                                        <div class="col-6">Faank</div>
-                                        <div class="col-6">
-                                            <div class="btn btn-danger">
-                                                Not Approved
-                                            </div>
-                                        </div>    
-                                    </div>
-                                </div> -->
+                                {{end}}
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- <img class="card-img-top" src="images/4253128.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Webinar 2</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div> -->
             </div>
         </div>
     </div>
