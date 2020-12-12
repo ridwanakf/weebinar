@@ -6,7 +6,6 @@ import (
 )
 
 type Repos struct {
-	CommonRepo internal.CommonRepo
 	TeacherRepo internal.TeacherRepo
 	StudentRepo internal.StudentRepo
 	WebinarRepo internal.WebinarRepo

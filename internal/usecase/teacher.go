@@ -15,41 +15,91 @@ func NewTeacherUsecase(repoTeacher internal.TeacherRepo, repoWebinar internal.We
 }
 
 func (t *TeacherUsecase) TeacherSignIn(id int64) error {
-	// TODO: Implement me!
-	return entity.ErrUserNotFound
+	err := t.repoTeacher.IsUserExist(id)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func (t *TeacherUsecase) TeacherSignUp(teacher entity.Teacher) error {
-	// TODO: Implement me!
+	err := t.repoTeacher.InsertNewUser(teacher)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
 func (t *TeacherUsecase) GetTeacherProfile(id int64) (entity.Teacher, error) {
-	// TODO: Implement me!
-	return entity.Teacher{Name: "ridwanakf"}, nil
+	teacher, err := t.repoTeacher.GetProfile(id)
+	if err != nil {
+		return entity.Teacher{}, err
+	}
+	return teacher, nil
 }
 
-func (t *TeacherUsecase) GetAllWebinar(id int64) ([]entity.Webinar, error) {
-	// TODO: Implement me!
-	return nil, nil
+func (t *TeacherUsecase) GetAllWebinar(teacherID int64) ([]entity.Webinar, error) {
+	webinars, err := t.repoWebinar.GetAllWebinar(teacherID)
+	if err != nil {
+		return nil, err
+	}
+
+	return webinars, nil
 }
 
 func (t *TeacherUsecase) GetWebinarByID(id int64) (entity.Webinar, error) {
-	panic("implement me")
+	webinar, err := t.repoWebinar.GetWebinarByID(id)
+	if err != nil {
+		return entity.Webinar{}, err
+	}
+
+	return webinar, nil
 }
 
 func (t *TeacherUsecase) CreateNewWebinar(id int64, param entity.CreateWebinarParam) (entity.Webinar, error) {
-	panic("implement me")
+	err := param.Validate()
+	if err != nil {
+		return entity.Webinar{}, err
+	}
+
+	webinar, err := t.repoWebinar.InsertNewWebinar(id, param)
+	if err != nil {
+		return entity.Webinar{}, err
+	}
+	return webinar, nil
 }
 
 func (t *TeacherUsecase) UpdateWebinar(id int64, param entity.UpdateWebinarParam) error {
-	panic("implement me")
+	err := param.Validate()
+	if err != nil {
+		return err
+	}
+
+	err = t.repoWebinar.UpdateWebinar(id, param)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func (t *TeacherUsecase) DeleteWebinar(id int64, param entity.DeleteWebinarParam) error {
-	panic("implement me")
+	err := param.Validate()
+	if err != nil {
+		return err
+	}
+
+	err = t.repoWebinar.DeleteWebinar(id, param)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func (t *TeacherUsecase) ApproveWaitingList(studentID int64, webinarID int64) error {
-	panic("implement me")
+	err := t.repoTeacher.ApproveWaitingList(studentID, webinarID)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
