@@ -13,7 +13,6 @@ import (
 type WeebinarApp struct {
 	Repos    *Repos
 	UseCases *Usecases
-	Gateways *Gateways
 
 	Cfg config.Config
 }
@@ -28,14 +27,12 @@ func NewWeebinarApp() (*WeebinarApp, error) {
 
 	app.Cfg = cfg
 
-	app.Repos, err = newRepos(&cfg)
+	app.Repos, err = newRepos(cfg)
 	if err != nil {
 		return nil, errors.Wrapf(err, "error initializing repo")
 	}
 
-	app.Gateways = newGateways(&cfg)
-
-	app.UseCases = newUsecases(app.Repos, app.Gateways, &cfg)
+	app.UseCases = newUsecases(app.Repos, cfg)
 
 	return app, nil
 }
@@ -45,7 +42,6 @@ func (a *WeebinarApp) Close() []error {
 
 	errs = append(errs, a.Repos.Close()...)
 	errs = append(errs, a.UseCases.Close()...)
-	errs = append(errs, a.Gateways.Close()...)
 
 	return errs
 }

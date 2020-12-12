@@ -13,7 +13,8 @@ type TeacherUC interface {
 	UpdateWebinar(id int64, param entity.UpdateWebinarParam) error
 	DeleteWebinar(id int64, param entity.DeleteWebinarParam) error
 
-	ApproveWaitingList(studentID int64, webinarID int64) error
+	ApproveWaitingList(id int64, studentID int64, webinarID int64) error
+	RejectWaitingList(id int64, studentID int64, webinarID int64) error
 }
 
 type StudentUC interface {

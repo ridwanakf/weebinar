@@ -95,8 +95,17 @@ func (t *TeacherUsecase) DeleteWebinar(id int64, param entity.DeleteWebinarParam
 	return nil
 }
 
-func (t *TeacherUsecase) ApproveWaitingList(studentID int64, webinarID int64) error {
-	err := t.repoTeacher.ApproveWaitingList(studentID, webinarID)
+func (t *TeacherUsecase) ApproveWaitingList(id int64, studentID int64, webinarID int64) error {
+	err := t.repoTeacher.ApproveWaitingList(id, studentID, webinarID)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (t *TeacherUsecase) RejectWaitingList(id int64, studentID int64, webinarID int64) error {
+	err := t.repoTeacher.RejectWaitingList(id, studentID, webinarID)
 	if err != nil {
 		return err
 	}
