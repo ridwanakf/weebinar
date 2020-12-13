@@ -9,7 +9,7 @@ type TeacherUC interface {
 
 	GetAllWebinar(teacherID int64) ([]entity.Webinar, error)
 	GetWebinarByID(id int64) (entity.Webinar, error)
-	CreateNewWebinar(id int64, param entity.CreateWebinarParam) (entity.Webinar, error)
+	CreateNewWebinar(id int64, param entity.CreateWebinarParam) error
 	UpdateWebinar(id int64, param entity.UpdateWebinarParam) error
 	DeleteWebinar(id int64, param entity.DeleteWebinarParam) error
 

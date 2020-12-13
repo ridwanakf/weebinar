@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS webinar_mst
     description varchar(250)          DEFAULT '',
     link        varchar(250) NOT NULL DEFAULT '',
     category    varchar(50)  NOT NULL DEFAULT '',
-    schedule    timestamp    NOT NULL,
+    schedule    date         NOT NULL,
     created_at  timestamp    NOT NULL DEFAULT now(),
     CONSTRAINT fk_teacher_webinar FOREIGN KEY (teacher_id) REFERENCES teacher_mst (id)
 );

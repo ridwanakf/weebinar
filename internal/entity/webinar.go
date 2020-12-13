@@ -11,7 +11,7 @@ type Webinar struct {
 	Desc         string    `json:"description" db:"description"`
 	Link         string    `json:"link" db:"link"`
 	Category     string    `json:"category" db:"category"`
-	Schedule     time.Time `json:"schedule" db:"schedule"`
+	Schedule     string    `json:"schedule" db:"schedule"`
 	Participants []Student `json:"participants"`
 	CreatedAt    time.Time `json:"created_at" db:"created_at"`
 }
@@ -28,17 +28,17 @@ type CreateWebinarParam struct {
 	Desc      string    `json:"description" db:"description"`
 	Link      string    `json:"link" db:"link"`
 	Category  string    `json:"category" db:"category"`
-	Schedule  time.Time `json:"schedule" db:"schedule"`
+	Schedule  string    `json:"schedule" db:"schedule"`
 	CreatedAt time.Time `json:"created_at" db:"created_at"`
 }
 
 type UpdateWebinarParam struct {
-	ID       int64     `db:"id"`
-	Title    string    `json:"title" db:"title"`
-	Desc     string    `json:"description" db:"description"`
-	Link     string    `json:"link" db:"link"`
-	Category string    `json:"category" db:"category"`
-	Schedule time.Time `json:"schedule" db:"schedule"`
+	ID       int64  `db:"id"`
+	Title    string `json:"title" db:"title"`
+	Desc     string `json:"description" db:"description"`
+	Link     string `json:"link" db:"link"`
+	Category string `json:"category" db:"category"`
+	Schedule string `json:"schedule" db:"schedule"`
 }
 
 type DeleteWebinarParam struct {

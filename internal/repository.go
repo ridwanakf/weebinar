@@ -22,7 +22,7 @@ type StudentRepo interface {
 type WebinarRepo interface {
 	// Teacher
 	GetAllWebinar(id int64) ([]entity.Webinar, error)
-	InsertNewWebinar(id int64, param entity.CreateWebinarParam) (entity.Webinar, error)
+	InsertNewWebinar(id int64, param entity.CreateWebinarParam) error
 	UpdateWebinar(id int64, param entity.UpdateWebinarParam) error
 	DeleteWebinar(id int64, param entity.DeleteWebinarParam) error
 

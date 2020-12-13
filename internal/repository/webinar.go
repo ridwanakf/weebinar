@@ -14,25 +14,61 @@ func NewWebinarDB(db *sqlx.DB) *WebinarDB {
 }
 
 func (w *WebinarDB) GetAllWebinar(id int64) ([]entity.Webinar, error) {
-	panic("implement me")
+	var webinars []entity.Webinar
+
+	err := w.db.Get(&webinars, SQLGetAllWebinarByTeacherID, id)
+	if err != nil {
+		return nil, err
+	}
+
+	return webinars, nil
 }
 
-func (w *WebinarDB) InsertNewWebinar(id int64, param entity.CreateWebinarParam) (entity.Webinar, error) {
-	panic("implement me")
+func (w *WebinarDB) InsertNewWebinar(id int64, param entity.CreateWebinarParam) error {
+	_, err := w.db.Exec(SQLInsertNewWebinar, id, param.Title, param.Desc, param.Link, param.Category, param.Schedule)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (w *WebinarDB) UpdateWebinar(id int64, param entity.UpdateWebinarParam) error {
-	panic("implement me")
+	_, err := w.db.Exec(SQLUpdateWebinar, param.Title, param.Desc, param.Link, param.Category, param.Schedule, id, param.ID)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (w *WebinarDB) DeleteWebinar(id int64, param entity.DeleteWebinarParam) error {
-	panic("implement me")
+	_, err := w.db.Exec(SQLDeleteWebinar, id, param.ID)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (w *WebinarDB) GetWebinarBySlug(slug string) ([]entity.Webinar, error) {
-	panic("implement me")
+	var webinars []entity.Webinar
+
+	err := w.db.Select(&webinars, SQLGetWebinarBySlug, "%"+slug+"%")
+	if err != nil {
+		return nil, err
+	}
+
+	return webinars, nil
 }
 
 func (w *WebinarDB) GetWebinarByID(id int64) (entity.Webinar, error) {
-	panic("implement me")
+	var webinar entity.Webinar
+
+	err := w.db.Get(&webinar, SQLGetWebinarByID, id)
+	if err != nil {
+		return webinar, err
+	}
+
+	return webinar, nil
 }
