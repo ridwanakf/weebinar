@@ -69,18 +69,24 @@ func (s *TeacherService) CreateWebinarPageHandler(c echo.Context) error {
 }
 
 func (s *TeacherService) CreateWebinarPostHandler(c echo.Context) error {
-	webinarParam := entity.CreateWebinarParam{}
-	if err := c.Bind(&webinarParam); err != nil {
-		log.Printf("[TeacherService][CreateWebinarPostHandler] error binding model request: %+v\n", err)
-		return BackToHome(c)
-	}
-
 	id, err := GetUserSessionID(c)
 	if err != nil {
 		log.Printf("[TeacherService][CreateWebinarPostHandler] error getting user id from session: %+v\n", err)
 		return BackToHome(c)
 	}
 
+	webinarParam := entity.CreateWebinarParam{}
+	if err := c.Bind(&webinarParam); err != nil {
+		log.Printf("[TeacherService][CreateWebinarPostHandler] error binding model request: %+v\n", err)
+		return c.Render(http.StatusOK, "create_failed", nil)
+	}
+
+	t, err := datePlusTime(webinarParam.ScheduleString)
+	if err != nil {
+		log.Printf("[TeacherService][CreateWebinarPostHandler] error parsing schedule: %+v\n", err)
+		return c.Render(http.StatusOK, "create_failed", nil)
+	}
+	webinarParam.Schedule = t
 	webinarParam.CreatedAt = time.Now()
 
 	err = s.uc.CreateNewWebinar(id, webinarParam)
@@ -175,4 +181,8 @@ func (s *TeacherService) DeleteWebinarHandler(c echo.Context) error {
 
 	// TODO: render popup message
 	return BackToHome(c)
+}
+
+func datePlusTime(date string) (time.Time, error) {
+	return time.Parse("2006-01-02 15:04", date)
 }
