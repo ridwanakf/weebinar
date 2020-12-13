@@ -56,17 +56,17 @@ func (t *TeacherUsecase) GetWebinarByID(id int64) (entity.Webinar, error) {
 	return webinar, nil
 }
 
-func (t *TeacherUsecase) CreateNewWebinar(id int64, param entity.CreateWebinarParam) (entity.Webinar, error) {
+func (t *TeacherUsecase) CreateNewWebinar(id int64, param entity.CreateWebinarParam) error {
 	err := param.Validate()
 	if err != nil {
-		return entity.Webinar{}, err
+		return err
 	}
 
-	webinar, err := t.repoWebinar.InsertNewWebinar(id, param)
+	err = t.repoWebinar.InsertNewWebinar(id, param)
 	if err != nil {
-		return entity.Webinar{}, err
+		return err
 	}
-	return webinar, nil
+	return nil
 }
 
 func (t *TeacherUsecase) UpdateWebinar(id int64, param entity.UpdateWebinarParam) error {

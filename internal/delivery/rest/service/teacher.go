@@ -83,7 +83,7 @@ func (s *TeacherService) CreateWebinarPostHandler(c echo.Context) error {
 
 	webinarParam.CreatedAt = time.Now()
 
-	_, err = s.uc.CreateNewWebinar(id, webinarParam)
+	err = s.uc.CreateNewWebinar(id, webinarParam)
 	if err != nil {
 		log.Printf("[TeacherService][CreateWebinarPostHandler] error creating new webinar: %+v\n", err)
 		return c.Render(http.StatusOK, "create_failed", nil)
