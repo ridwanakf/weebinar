@@ -8,7 +8,11 @@ type Student struct {
 }
 
 type EnrollWebinarParam struct {
+	WebinarID int64 `json:"webinar_id" db:"webinar_id"`
+	TeacherID int64 `json:"teacher_id" db:"teacher_id"`
 }
 
 type CancelEnrollmentWebinarParam struct {
+	WebinarID int64 `json:"webinar_id" db:"webinar_id"`
+	TeacherID int64 `json:"teacher_id" db:"teacher_id"`
 }
