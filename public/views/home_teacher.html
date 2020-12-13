@@ -31,10 +31,13 @@
             {{range .webinars}}
             <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
                 <div class="content content-settings zoom" style="width: auto;">
-                    <!-- <img class="card-img-top" src="/assets/images/nasa-Q1p7bh3SHj8-unsplash.jpg"> -->
-                    <!-- <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg"> -->
-                    <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg"
-                        alt="Card image cap">
+                    {{if eq .Category "Science"}}
+                    <img class="card-img-top" src="/assets/images/nasa-Q1p7bh3SHj8-unsplash.jpg">
+                    {{else if eq .Category "Social"}}
+                    <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg">
+                    {{else}}
+                    <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg">
+                    {{end}}
                     <div class="card-body">
                         <h5 class="card-title">{{.Title}}</h5>
                         <div class="card-text text-secondary">
@@ -42,16 +45,6 @@
                                 {{.Desc}}
                             </div>
                         </div>
-                        <script>
-                            $(document).ready(function () {
-                                for (let c of $("div.clip-context")) {
-                                    if ($(c).innerHeight() >= 95) {
-                                        $(c).text($(c).text().substr(0, 170));
-                                        $(c).append(" ...");
-                                    }
-                                }
-                            });
-                        </script>
                         <form action="/teacher/webinar/{{.ID}}" method="get">
                             <input type="submit" class="btn btn-dark mt-2" value="Show Details" />
                         </form>
@@ -98,4 +91,14 @@
 </body>
 
 </html>
+<script>
+    $(document).ready(function () {
+        for (let c of $("div.clip-context")) {
+            if ($(c).innerHeight() >= 95) {
+                $(c).text($(c).text().substr(0, 170));
+                $(c).append(" ...");
+            }
+        }
+    });
+</script>
 {{end}}

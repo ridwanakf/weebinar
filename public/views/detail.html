@@ -15,11 +15,15 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-8 mb-3">
                         <div class="card">
+                            {{if eq .webinar.Category "Science"}}
                             <img class="card-img-top" src="/assets/images/nasa-Q1p7bh3SHj8-unsplash.jpg">
-                            <!-- <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg"> -->
-                            <!-- <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg" -->
+                            {{else if eq .webinar.Category "Social"}}
+                            <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg">
+                            {{else}}
+                            <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg">
+                            {{end}}
                             <div class="card-body">
-                                <div class="h4">{{.webinar.Title}}</div>
+                                <div class="h4"><b>{{.webinar.Title}}</b></div>
                                 <div class="card-text">
                                     {{.webinar.Desc}}
                                 </div>
@@ -29,17 +33,17 @@
                     <div class="col-lg-4 col-md-4">
                         <div class="card mb-4">
                             <div class="card-body">
-                                <h5 class="card-title">Webinar Details</h5>
-                                <p class="card-text">Date: </p>22 Dec 20 16:00
+                                <h5 class="card-title"><b>Webinar Details</b></h5>
+                                <p class="card-text"><b>Date: </b></p>{{.webinar.Schedule}}
                                 <br>
-                                <p class="card-text">Category: </p>{{.webinar.Category}} <br>
-                                <p class="card-text">Teacher: </p>{{.name}}<br>
-                                <p class="card-text">Meeting Link: </p>{{.webinar.Link}}
+                                <p class="card-text mt-2"><b>Category: </b></p>{{.webinar.Category}} <br>
+                                <p class="card-text mt-2"><b>Teacher: </b></p>{{.name}}<br>
+                                <p class="card-text mt-2"><b>Meeting Link: </b></p>{{.webinar.Link}}
                             </div>
                         </div>
                         <div class="card mb-4">
                             <div class="card-body">
-                                <h5 class="card-title">Participants</h5>
+                                <h5 class="card-title"><b>Participants</b></h5>
                                 {{ range .participants}}
                                 <div class="mb-2">
                                     <div class="row">

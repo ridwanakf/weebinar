@@ -1,6 +1,6 @@
 {{define "_navbar"}}
 <div class="d-flex flex-column flex-md-row flex-lg-row p-2 px-md-4 bg-white border-bottom">
-    <nav class="navbar my-0 mr-sm-auto mr-md-auto mr-lg-auto h1">
+    <nav class="navbar my-0 mr-sm-auto mr-md-auto mr-lg-auto h1 ml-4">
         <a class="navbar-brand" href="/teacher/home">Weebinar</a>
         <form class="navbar-search mr-sm-auto mr-md-auto mr-lg-auto">
             <div class="input-group">
@@ -13,7 +13,7 @@
     </nav>
     <nav class="navbar my-2 my-md-0 ">
         <!--Notification Dropdown-->
-        <div class="dropdown">
+        <!-- <div class="dropdown">
             <button onclick="notificationDropdown()" class="dropbtn mr-lg-2 mr-md-2">Notification
                 <i class="dropdown-icon fas fa-bell ml-1"></i>
             </button>
@@ -21,10 +21,10 @@
                 <a href="#">Notification 1:
                     ......................................................................................</a>
             </div>
-        </div>
+        </div> -->
         <!--Username Dropdown-->
-        <div class="dropdown ">
-            <button onclick="usernameDropdown()" class="dropbtn">Settings
+        <div class="dropdown mx-4">
+            <button onclick="usernameDropdown()" class="dropbtn">User
                 <i class="dropdown-icon fas fa-angle-down ml-1"></i>
             </button>
             <div id="myDropdown" class="dropdown-content">
@@ -60,23 +60,23 @@
     //Notification Dropdown
     /* When the user clicks on the button,
     toggle between hiding and showing the dropdown content */
-    function notificationDropdown() {
-        document.getElementById("notifDropdown").classList.toggle("show");
-    }
+    // function notificationDropdown() {
+    //     document.getElementById("notifDropdown").classList.toggle("show");
+    // }
 
     // Close the dropdown menu if the user clicks outside of it
-    window.onclick = function (event) {
-        if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-            }
-        }
-    }
+    // window.onclick = function (event) {
+    //     if (!event.target.matches('.dropbtn')) {
+    //         var dropdowns = document.getElementsByClassName("dropdown-content");
+    //         var i;
+    //         for (i = 0; i < dropdowns.length; i++) {
+    //             var openDropdown = dropdowns[i];
+    //             if (openDropdown.classList.contains('show')) {
+    //                 openDropdown.classList.remove('show');
+    //             }
+    //         }
+    //     }
+    // }
 
 
     //Username dropdown

@@ -110,7 +110,7 @@ body {
   display: none;
   position: absolute;
   background-color: #fff;
-  min-width: 140px;
+  max-width: 120px;
   /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
   border: 1px solid #dee2e6 !important;
   border-radius: 5px;
@@ -132,7 +132,7 @@ body {
   background-color: #f8f9fa;
 }
 
-/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+/* Show the dropdown menu */
 .show {
   display: block;
 }
@@ -172,11 +172,11 @@ body {
   object-position: center; /* Center the image within the element */
 }
 
-#notifDropdown {
+/* #notifDropdown {
   width: 270px;
   height: auto;
   word-wrap: break-word;
-}
+} */
 
 .input-icons i {
   position: absolute;
@@ -208,4 +208,8 @@ body {
   width: 110px;
   height: 110px;
   overflow: scroll;
+}
+
+input{
+  word-break: break-word;
 }
