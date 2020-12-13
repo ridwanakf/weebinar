@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS teacher_mst
     id      bigint      NOT NULL PRIMARY KEY,
     name    varchar(50) NOT NULL DEFAULT '',
     email   varchar(50) NOT NULL DEFAULT '',
-    picture varchar(100)         DEFAULT '',
+    picture varchar(200)         DEFAULT '',
     CONSTRAINT id_teacher_unique UNIQUE (id)
 );
 
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS student_mst
     id      bigint      NOT NULL PRIMARY KEY,
     name    varchar(50) NOT NULL DEFAULT '',
     email   varchar(50) NOT NULL DEFAULT '',
-    picture varchar(100)         DEFAULT '',
+    picture varchar(200)         DEFAULT '',
     CONSTRAINT id_student_unique UNIQUE (id)
 );
 
