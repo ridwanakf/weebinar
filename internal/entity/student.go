@@ -16,3 +16,11 @@ type CancelEnrollmentWebinarParam struct {
 	WebinarID int64 `json:"webinar_id" db:"webinar_id"`
 	TeacherID int64 `json:"teacher_id" db:"teacher_id"`
 }
+
+
+func (e EnrollWebinarParam) Validate() error {
+	return nil
+}
+func (c CancelEnrollmentWebinarParam) Validate() error {
+	return nil
+}
