@@ -31,6 +31,14 @@ func initTeacherHandlers(eg *echo.Group, svc *service.Services) {
 }
 
 func initStudentHandlers(eg *echo.Group, svc *service.Services) {
+	eg.GET("/home", svc.HomeStudentPageHandler)
+	eg.GET("/profile", svc.ProfileStudentPageHandler)
+
+	webinarGroup := eg.Group("/webinar")
+	webinarGroup.GET("/all", svc.RegisteredWebinarHandler)
+	webinarGroup.GET("/search", svc.SearchWebinarHandler)
+	webinarGroup.POST("/:id/enroll", svc.EnrollWebinarHandler)
+	webinarGroup.PUT("/:id/cancel", svc.CancelEnrollWebinarHandler)
 }
 
 func Start(app *app.WeebinarApp) {

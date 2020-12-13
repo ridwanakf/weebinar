@@ -16,7 +16,7 @@ func NewWebinarDB(db *sqlx.DB) *WebinarDB {
 func (w *WebinarDB) GetAllWebinar(id int64) ([]entity.Webinar, error) {
 	var webinars []entity.Webinar
 
-	err := w.db.Get(&webinars, SQLGetAllWebinarByTeacherID, id)
+	err := w.db.Select(&webinars, SQLGetAllWebinarByTeacherID, id)
 	if err != nil {
 		return nil, err
 	}
