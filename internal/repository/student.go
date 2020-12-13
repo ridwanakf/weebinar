@@ -14,25 +14,61 @@ func NewStudentDB(db *sqlx.DB) *StudentDB {
 }
 
 func (s *StudentDB) IsUserExist(id int64) error {
-	panic("implement me")
+	isExist := false
+
+	err := s.db.Get(&isExist, SQLCheckStudentExist, id)
+	if err != nil || !isExist {
+		return entity.ErrUserNotFound
+	}
+
+	return nil
 }
 
 func (s *StudentDB) InsertNewUser(student entity.Student) error {
-	panic("implement me")
+	_, err := s.db.Exec(SQLInsertNewStudent, student.ID, student.Name, student.Email, student.Picture)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (s *StudentDB) GetProfile(id int64) (entity.Student, error) {
-	panic("implement me")
+	var student entity.Student
+
+	err := s.db.Get(&student, SQLGetStudentProfile, id)
+	if err != nil {
+		return student, err
+	}
+
+	return student, nil
 }
 
 func (s *StudentDB) GetAllRegisteredWebinar(id int64) ([]entity.Webinar, error) {
-	panic("implement me")
+	var webinars []entity.Webinar
+
+	err := s.db.Select(&webinars, SQLGetRegisteredWebinars, id)
+	if err != nil {
+		return nil, err
+	}
+
+	return webinars, nil
 }
 
 func (s *StudentDB) EnrollWebinar(id int64, param entity.EnrollWebinarParam) error {
-	panic("implement me")
+	_, err := s.db.Exec(SQLEnrollWebinar, id, param.WebinarID, param.TeacherID)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (s *StudentDB) CancelEnrollmentWebinar(id int64, param entity.CancelEnrollmentWebinarParam) error {
-	panic("implement me")
+	_, err := s.db.Exec(SQLCancelEnrollWebinar, id, param.WebinarID, param.TeacherID)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

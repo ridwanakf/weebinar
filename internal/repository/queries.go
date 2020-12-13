@@ -30,3 +30,21 @@ const (
 
 	SQLGetWebinarByID = `SELECT * FROM webinar_mst WHERE id=$1`
 )
+
+/*** STUDENT ***/
+const (
+	SQLCheckStudentExist = `SELECT EXISTS(SELECT * FROM student_mst WHERE id=$1)`
+
+	SQLInsertNewStudent = `INSERT INTO student_mst (id, name, email, picture) 
+							VALUES ($1, $2, $3, $4)`
+
+	SQLGetStudentProfile = `SELECT * FROM student_mst WHERE id=$1`
+
+	SQLGetRegisteredWebinars = `SELECT * FROM webinar_mst as w INNER JOIN participant_mst as p 
+								ON w.id=p.webinar_id WHERE p.student_id=$1`
+
+	SQLEnrollWebinar = `INSERT INTO participant_mst (student_id, webinar_id, teacher_id, status) 
+							VALUES ($1, $2, $3, 0)`
+
+	SQLCancelEnrollWebinar = `DELETE FROM participant_mst WHERE student_id=$1 AND webinar_id=$2 AND teacher_id=$3`
+)
