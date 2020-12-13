@@ -20,6 +20,7 @@ func (t *TeacherDB) IsUserExist(id int64) error {
 	if err != nil || !isExist {
 		return entity.ErrUserNotFound
 	}
+
 	return nil
 }
 
@@ -39,6 +40,7 @@ func (t *TeacherDB) GetProfile(id int64) (entity.Teacher, error) {
 	if err != nil {
 		return teacher, err
 	}
+
 	return teacher, nil
 }
 
