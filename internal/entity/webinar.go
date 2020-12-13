@@ -5,15 +5,16 @@ import (
 )
 
 type Webinar struct {
-	ID           int64     `json:"id" db:"id"`
-	TeacherID    int64     `json:"teacher_id" db:"teacher_id"`
-	Title        string    `json:"title" db:"title"`
-	Desc         string    `json:"description" db:"description"`
-	Link         string    `json:"link" db:"link"`
-	Category     string    `json:"category" db:"category"`
-	Schedule     string    `json:"schedule" db:"schedule"`
-	Participants []Student `json:"participants"`
-	CreatedAt    time.Time `json:"created_at" db:"created_at"`
+	ID             int64     `json:"id" db:"id" form:"id"`
+	TeacherID      int64     `json:"teacher_id" db:"teacher_id" form:"teacher_id"`
+	Title          string    `json:"title" db:"title" form:"title"`
+	Desc           string    `json:"description" db:"description" form:"description"`
+	Link           string    `json:"link" db:"link" form:"link"`
+	Category       string    `json:"category" db:"category" form:"category"`
+	ScheduleString string    `json:"schedule_string" db:"schedule_string" form:"schedule_string"`
+	Schedule       time.Time `json:"schedule" db:"schedule" form:"schedule"`
+	Participants   []Student `json:"participants"`
+	CreatedAt      time.Time `json:"created_at" db:"created_at"`
 }
 
 type ListParticipants struct {
@@ -23,22 +24,24 @@ type ListParticipants struct {
 }
 
 type CreateWebinarParam struct {
-	TeacherID int64     `json:"teacher_id" db:"teacher_id"`
-	Title     string    `json:"title" db:"title"`
-	Desc      string    `json:"description" db:"description"`
-	Link      string    `json:"link" db:"link"`
-	Category  string    `json:"category" db:"category"`
-	Schedule  string    `json:"schedule" db:"schedule"`
-	CreatedAt time.Time `json:"created_at" db:"created_at"`
+	TeacherID      int64     `json:"teacher_id" db:"teacher_id" form:"teacher_id"`
+	Title          string    `json:"title" db:"title" form:"title"`
+	Desc           string    `json:"description" db:"description" form:"description"`
+	Link           string    `json:"link" db:"link" form:"link"`
+	Category       string    `json:"category" db:"category" form:"category"`
+	ScheduleString string    `json:"schedule_string" db:"schedule_string" form:"schedule_string"`
+	Schedule       time.Time `json:"schedule" db:"schedule" form:"schedule"`
+	CreatedAt      time.Time `json:"created_at" db:"created_at"`
 }
 
 type UpdateWebinarParam struct {
-	ID       int64  `db:"id"`
-	Title    string `json:"title" db:"title"`
-	Desc     string `json:"description" db:"description"`
-	Link     string `json:"link" db:"link"`
-	Category string `json:"category" db:"category"`
-	Schedule string `json:"schedule" db:"schedule"`
+	ID             int64     `json:"id" db:"id" form:"id"`
+	Title          string    `json:"title" db:"title" form:"title"`
+	Desc           string    `json:"description" db:"description" form:"description"`
+	Link           string    `json:"link" db:"link" form:"link"`
+	Category       string    `json:"category" db:"category" form:"category"`
+	ScheduleString string    `json:"schedule_string" db:"schedule_string" form:"schedule_string"`
+	Schedule       time.Time `json:"schedule" db:"schedule" form:"schedule"`
 }
 
 type DeleteWebinarParam struct {
