@@ -9,3 +9,8 @@ database:
   address: "postgres://postgres:postgres@localhost:5432/weebinar?sslmode=disable"
   max_conns: 3000
   max_idle_conns: 1000
+
+oauth:
+  client_id: ""
+  client_secret: ""
+  random_state: ""
