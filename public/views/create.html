@@ -36,17 +36,6 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <script>
-                                        function countChar(val) {
-                                            var len = val.value.length;
-                                            if (len >= 250) {
-                                                $('#charNum').text("You have reached the maximum characters limit.")
-                                                val.value = val.value.substring(0, 250);
-                                            } else {
-                                                $('#charNum').text(250 - len + " characters left.");
-                                            }
-                                        };
-                                    </script>
                                     <label for="">Description <abbr title="Required" class="text-danger">*</abbr>
                                     </label>
                                     <textarea name="description" class="form-control" placeholder="Description"
@@ -99,6 +88,17 @@
 </body>
 
 </html>
+<script>
+    function countChar(val) {
+        var len = val.value.length;
+        if (len >= 250) {
+            $('#charNum').text("You have reached the maximum characters limit.")
+            val.value = val.value.substring(0, 250);
+        } else {
+            $('#charNum').text(250 - len + " characters left.");
+        }
+    };
+</script>
 <!-- <script>
     function validateForm(){
         var schedule = document.getElementById("#schedule");
