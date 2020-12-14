@@ -34,7 +34,7 @@
                         <div class="card mb-4">
                             <div class="card-body">
                                 <h5 class="card-title"><b>Webinar Details</b></h5>
-                                <p class="card-text"><b>Date: </b></p>{{.webinar.Schedule}}
+                                <p class="card-text"><b>Date: </b></p>{{.webinar.ScheduleString}}
                                 <br>
                                 <p class="card-text mt-2"><b>Category: </b></p>{{.webinar.Category}} <br>
                                 <p class="card-text mt-2"><b>Teacher: </b></p>{{.teacher.Name}}<br>
@@ -47,7 +47,7 @@
                                 {{ range .participants}}
                                 <div class="mb-2">
                                     <div class="row">
-                                        <div class="col-6">{{.Name}}</div>
+                                        <div class="col-6">{{.Student.Name}}</div>
                                         <div class="col-6">
                                             <!-- <div class="btn btn-warning">Requested</div> -->
                                             <div class="btn btn-success">{{.Status}}</div>

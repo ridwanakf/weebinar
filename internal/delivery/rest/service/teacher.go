@@ -120,8 +120,9 @@ func (s *TeacherService) WebinarDetailPageHandler(c echo.Context) error {
 	}
 
 	return c.Render(http.StatusOK, "detail", map[string]interface{}{
-		"teacher": teacher,
-		"webinar": webinar,
+		"teacher":      teacher,
+		"webinar":      webinar,
+		"participants": webinar.Participants,
 	})
 }
 
