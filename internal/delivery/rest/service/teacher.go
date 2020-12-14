@@ -60,7 +60,8 @@ func (s *TeacherService) ProfileTeacherPageHandler(c echo.Context) error {
 		return Logout(c)
 	}
 	return c.Render(http.StatusOK, "settings", map[string]interface{}{
-		"teacher": teacher,
+		"user": teacher,
+		"role": "teacher",
 	})
 }
 
@@ -115,7 +116,7 @@ func (s *TeacherService) WebinarDetailPageHandler(c echo.Context) error {
 
 	teacher, err := s.uc.GetTeacherProfile(webinar.TeacherID)
 	if err != nil {
-		log.Printf("[TeacherService][ProfileTeacherPageHandler] error getting user details: %+v\n", err)
+		log.Printf("[TeacherService][WebinarDetailPageHandler] error getting user details: %+v\n", err)
 		return Logout(c)
 	}
 

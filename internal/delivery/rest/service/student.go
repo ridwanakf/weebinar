@@ -53,7 +53,8 @@ func (s *StudentService) ProfileStudentPageHandler(c echo.Context) error {
 	}
 
 	return c.Render(http.StatusOK, "settings", map[string]interface{}{
-		"student": student,
+		"user": student,
+		"role": "teacher",
 	})
 }
 
