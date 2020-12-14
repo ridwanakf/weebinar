@@ -92,9 +92,15 @@ func (s *StudentService) SearchWebinarHandler(c echo.Context) error {
 		return BackToHome(c)
 	}
 
-	return c.Render(http.StatusOK, "", map[string]interface{}{
+	return c.Render(http.StatusOK, "webinar_search", map[string]interface{}{
 		"webinars": webinars,
+		"total_result": len(webinars),
+		"slug": slug,
 	})
+}
+
+func (s *StudentService) StudentWebinarDetailPageHandler(c echo.Context) error {
+	return nil
 }
 
 func (s *StudentService) EnrollWebinarHandler(c echo.Context) error {

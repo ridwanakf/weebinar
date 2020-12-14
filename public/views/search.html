@@ -1,96 +1,53 @@
-{{define "search"}}
-<!DOCTYPE html>
-<html lang="en">
+{{define "webinar_search"}}
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <title>{{.title}}</title>
-    {{template "_header"}}
-</head>
+    <head>
+        <title>{{.title}}</title>
+        {{template "_header"}}
+    </head>
 
-<body class="sess">
+    <body class="sess">
     {{template "_navbar_student"}}
     <!--Web Content (Webinar Details)-->
     <div class="container mt-4">
         <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="mx-4">
-                        <div class="my-4">
-                            <h4>Searching for "word-searched"</h4>
-                            <div class="text-secondary">About ... results</div>
-                        </div>
-                        <div class="mb-4">
-                            <a class="h5 lead" href="#">Title</a>
-                            <p style="margin-bottom:0;">Category</p>
-                            <small class=" card-text text-secondary">
-                                <div class="clip-context">
-                                    Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description
-                                Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description
-                                Description
-                                </div>
-                            </small>
-                        </div>
-                        <div class="mb-4">
-                            <a class="h5 lead" href="#">Title</a>
-                            <p style="margin-bottom:0;">Category</p>
-                            <small class=" card-text text-secondary">
-                                <div class="clip-context">
-                                    Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description
-                                Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description
-                                Description
-                                </div>
-                            </small>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mx-4">
+                            <div class="my-4">
+                                <h4>Searching for "{{.slug}}</h4>
+                                <div class="text-secondary">About {{.total_result}} results</div>
+                            </div>
+                            {{range .webinars}}
+                            <div class="mb-4">
+                                <a class="h5 lead" href="/student/webinar/{{.ID}}">{{.Title}}</a>
+                                <p style="margin-bottom:0;">{{.Category}}</p>
+                                <small class=" card-text text-secondary">
+                                    <div class="clip-context">
+                                        {{.Desc}}
+                                    </div>
+                                </small>
+                            </div>
+                            {{end}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
     </div>
-</body>
+    </body>
 
-</html>
-<script>
-    $(document).ready(function () {
-        for (let c of $("div.clip-context")) {
-            if ($(c).innerHeight() >= 85) {
-                $(c).text($(c).text().substr(0, 450));
-                $(c).append(" ...");
+    </html>
+    <script>
+        $(document).ready(function () {
+            for (let c of $("div.clip-context")) {
+                if ($(c).innerHeight() >= 85) {
+                    $(c).text($(c).text().substr(0, 450));
+                    $(c).append(" ...");
+                }
             }
-        }
-    });
-</script>
+        });
+    </script>
 {{end}}
