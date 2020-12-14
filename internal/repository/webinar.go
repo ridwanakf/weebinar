@@ -34,7 +34,7 @@ func (w *WebinarDB) InsertNewWebinar(id int64, param entity.CreateWebinarParam) 
 }
 
 func (w *WebinarDB) UpdateWebinar(id int64, param entity.UpdateWebinarParam) error {
-	_, err := w.db.Exec(SQLUpdateWebinar, param.Title, param.Desc, param.Link, param.Category,param.Schedule, param.ScheduleString, id, param.ID)
+	_, err := w.db.Exec(SQLUpdateWebinar, param.Title, param.Desc, param.Link, param.Category, param.Schedule, param.ScheduleString, id, param.ID)
 	if err != nil {
 		return err
 	}
@@ -63,12 +63,22 @@ func (w *WebinarDB) GetWebinarBySlug(slug string) ([]entity.Webinar, error) {
 }
 
 func (w *WebinarDB) GetWebinarByID(id int64) (entity.Webinar, error) {
-	var webinar entity.Webinar
+	var (
+		webinar      entity.Webinar
+		participants []entity.Participants
+	)
 
 	err := w.db.Get(&webinar, SQLGetWebinarByID, id)
 	if err != nil {
 		return webinar, err
 	}
+
+	err = w.db.Select(&participants, SQLGetParticipants, webinar.ID)
+	if err != nil {
+		return webinar, err
+	}
+
+	webinar.Participants = participants
 
 	return webinar, nil
 }

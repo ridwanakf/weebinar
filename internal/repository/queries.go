@@ -29,6 +29,10 @@ const (
 	SQLGetWebinarBySlug = `SELECT * FROM webinar_mst WHERE title ILIKE $1`
 
 	SQLGetWebinarByID = `SELECT * FROM webinar_mst WHERE id=$1`
+
+	SQLGetParticipants = `SELECT s.*, p.status FROM participant_mst as p 
+							INNER JOIN student_mst as s ON s.id=p.student_id 
+							WHERE p.webinar_id=$1`
 )
 
 /*** STUDENT ***/
