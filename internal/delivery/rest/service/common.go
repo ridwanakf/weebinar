@@ -62,11 +62,7 @@ func (s *CommonService) IndexHandler(c echo.Context) error {
 
 func (s *CommonService) SignOutHandler(c echo.Context) error {
 	sess, _ := session.Get("session", c)
-	sess.Options = &sessions.Options{
-		Path:     "/",
-		MaxAge:   -1,
-		HttpOnly: true,
-	}
+	sess.Options.MaxAge = -1
 
 	sess.Save(c.Request(), c.Response())
 
