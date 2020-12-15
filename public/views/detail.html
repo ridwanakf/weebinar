@@ -66,27 +66,53 @@
                                 <p class="card-text">{{.webinar.Link}}</p>
                             </div>
                         </div>
-                        <div class="card mb-4" style="width: auto; height: 200px;">
+                        <!-- <h5>{{.lenparticipants}}</h5> -->
+                        <div class="card mb-4" style="width: auto; max-height: 370px">
                             <div class="card-body">
                                 <h5 class="card-title text-blue">Participants</h5>
-                                <div class="scrollable">
+                                {{if eq .lenparticipants 0}}
+                                <small class="text-center text-secondary">No one has registered.</small>
+                                {{else if and (ge .lenparticipants 1) (le .lenparticipants 5)}}
+                                <div>
                                     {{ range .participants}}
-                                    <div class="row mb-2">
-                                        <div class="col-6">{{.Student.Name}}</div>
+                                    <div class="d-flex align-items-center mr-2" style="height:48px">
+                                        <span class="float-left mr-auto">{{.Student.Name}}</span>
                                         {{if eq .Status 0}}
-                                            <form action="/teacher/webinar/{{$.webinar.ID}}/approve/{{.Student.ID}}" method="post">
-                                                <input type="submit" class="btn btn-dark btn-block my-4" value="Approve"/>
-                                            </form>
+                                        <form action="/teacher/webinar/{{$.webinar.ID}}/approve/{{.Student.ID}}"
+                                            method="post">
+                                            <input type="submit" class="btn-blue float-right my-4" value="Approve" />
+                                        </form>
                                         {{else}}
-                                            <p class="center text-success my-4">Approved</p>
+                                        <p class="float-right text-success my-4">Approved</p>
                                         {{end}}
-{{/*                                        <div class="col-6">*/}}
-{{/*                                            <div class="btn btn-warning">Requested</div>*/}}
-{{/*                                            <div class="btn btn-sm btn-success">{{.Status}}</div>*/}}
-{{/*                                        </div>*/}}
                                     </div>
+                                    {{/* <div class="col-6">*/}}
+                                        {{/* <div class="btn btn-warning">Requested</div>*/}}
+                                        {{/* <div class="btn btn-sm btn-success">{{.Status}}</div>*/}}
+                                        {{/* </div>*/}}
                                     {{end}}
                                 </div>
+                                {{else}}
+                                <div class="scrollable">
+                                    {{ range .participants}}
+                                    <div class="d-flex align-items-center mr-2">
+                                        <span class="float-left mr-auto">{{.Student.Name}}</span>
+                                        {{if eq .Status 0}}
+                                        <form action="/teacher/webinar/{{$.webinar.ID}}/approve/{{.Student.ID}}"
+                                            method="post">
+                                            <input type="submit" class="btn-blue float-right my-4" value="Approve" />
+                                        </form>
+                                        {{else}}
+                                        <p class="float-right text-success my-4">Approved</p>
+                                        {{end}}
+                                    </div>
+                                    {{/* <div class="col-6">*/}}
+                                        {{/* <div class="btn btn-warning">Requested</div>*/}}
+                                        {{/* <div class="btn btn-sm btn-success">{{.Status}}</div>*/}}
+                                        {{/* </div>*/}}
+                                    {{end}}
+                                </div>
+                                {{end}}
                             </div>
                         </div>
                     </div>
@@ -108,7 +134,7 @@
                         <div class="row mb-2">
                             <div class="col">
                                 <label for="">Title of Webinar</label>
-                                <input type="text" name="title" class="form-control" placeholder="Title" value="">
+                                <input type="text" name="title" class="form-control" placeholder="Title" value="{{.webinar.Title}}">
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -116,7 +142,7 @@
                                 <label for="">Description
                                 </label>
                                 <textarea name="description" class="form-control" placeholder="Description"
-                                    onkeyup="countChar(this)" maxlength="250"></textarea>
+                                    onkeyup="countChar(this)" maxlength="250">{{.webinar.Desc}}</textarea>
                                 <div class="d-flex justify-content-end">
                                     <small class="text-secondary" id="charNum"></small>
                                 </div>
@@ -125,13 +151,13 @@
                         <div class="row mb-2">
                             <div class="col">
                                 <label for="">Meeting Link </label>
-                                <input type="text" name="link" id="link" class="form-control" placeholder="https://...">
+                                <input type="text" name="link" id="link" class="form-control" placeholder="https://..." value="{{.webinar.Link}}">
                             </div>
                         </div>
                         <div class="row mb-2">
                             <div class="col">
                                 <label for="">Schedule </label>
-                                <input type="text" name="schedule_string" title="YYYY-MM-DD HH:MM" class="form-control"
+                                <input type="text" name="schedule_string" title="YYYY-MM-DD HH:MM" class="form-control" value="{{.webinar.ScheduleString}}"
                                     placeholder="YYYY-MM-DD HH:MM">
                             </div>
                         </div>
@@ -139,16 +165,27 @@
                             <div class="col">
                                 <label for="">Category </label>
                                 <select class="form-control" name="category" id="">
-                                    <option>Science</option>
+                                    {{if eq .webinar.Category "Science"}}
+                                    <option selected>Science</option>
                                     <option>Social</option>
                                     <option>Literature</option>
+                                    {{else if eq .webinar.Category "Social"}}
+                                    <option>Science</option>
+                                    <option selected>Social</option>
+                                    <option>Literature</option>
+                                    {{else}}
+                                    <option>Science</option>
+                                    <option>Social</option>
+                                    <option selected>Literature</option>
+                                    {{end}}
                                 </select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col"></div>
                             <div class="col-12 col-md-8 col-lg-8 d-flex justify-content-end flex-column flex-md-row ">
-                                <button type="button" class="btn btn-outline-secondary mr-lg-2 mr-md-2 mr-0 my-2 my-md-0 my-lg-0"
+                                <button type="button"
+                                    class="btn btn-outline-secondary mr-lg-2 mr-md-2 mr-0 my-2 my-md-0 my-lg-0"
                                     data-dismiss="modal">Close</button>
                                 <input type="submit" class="btn-blue m-0" value="Save changes">
                             </div>
@@ -173,7 +210,8 @@
                         <div class="row">
                             <div class="col"></div>
                             <div class="col-12 col-md-8 col-lg-8 d-flex justify-content-end flex-column flex-md-row">
-                                <button type="button" class="btn btn-outline-secondary mr-lg-2 mr-md-2 mr-0 my-2 my-md-0 my-lg-0"
+                                <button type="button"
+                                    class="btn btn-outline-secondary mr-lg-2 mr-md-2 mr-0 my-2 my-md-0 my-lg-0"
                                     data-dismiss="modal">No</button>
                                 <input type="submit" class="btn btn-danger m-0" value="Yes, delete">
                             </div>

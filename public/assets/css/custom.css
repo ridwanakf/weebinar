@@ -290,5 +290,9 @@ input {
 
 .scrollable{
   overflow-y: auto;
-  max-height: 300px;
+  max-height: 276px;
+}
+
+.scrollable > .d-flex{
+  height:48px;
 }

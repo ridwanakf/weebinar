@@ -1,11 +1,11 @@
 {{define "home_student"}}
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-        <title>{{.title}}</title>
-        {{template "_header"}}
-    </head>
+<head>
+    <title>{{.title}}</title>
+    {{template "_header"}}
+</head>
 
 <body class="sess text-dark-gray">
     {{template "_navbar_student"}}
@@ -23,45 +23,47 @@
         </div>
         <div class="row mb-5">
             {{range .webinars_and_status}}
-                <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
-                    <div class="content content-settings zoom shadow" style="width: auto;">
-                        {{if eq .Webinar.Category "Science"}}
-                            <img class="card-img-top" src="/assets/images/nasa-Q1p7bh3SHj8-unsplash.jpg">
-                        {{else if eq .Webinar.Category "Social"}}
-                            <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg">
-                        {{else}}
-                            <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg">
-                        {{end}}
-                        <div class="card-body">
-                            <p class="card-title text-blue" style="margin-bottom:0; height: 50px; overflow:hidden">{{.Webinar.Title}}</p>
-                            <div class="card-text text-blue-1"><small>{{.Webinar.Category}}</small></div>
-                            <div class="d-flex flex-column flex-md-row mb-2">
-                                {{if eq .Status 0}}
-                                    <div class="d-flex flex-column flex-md-row mb-2">
-                                        <span class="badge badge-warning mr-2">Waiting for Approval</span>
-                                    </div>
-                                {{else if eq .Status 1}}
-                                    <div class="d-flex flex-column flex-md-row mb-2">
-                                        <span class="badge badge-success mr-2">Approved</span>
-                                    </div>
-                                {{end}}
+            <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
+                <div class="content content-settings zoom shadow" style="width: auto;">
+                    {{if eq .Webinar.Category "Science"}}
+                    <img class="card-img-top" src="/assets/images/nasa-Q1p7bh3SHj8-unsplash.jpg" style="height:100px">
+                    {{else if eq .Webinar.Category "Social"}}
+                    <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg"
+                        style="height:100px">
+                    {{else}}
+                    <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg"
+                        style="height:100px">
+                    {{end}}
+                    <div class="card-body">
+                        <div class="card-title text-blue" style="margin-bottom:0; height: 50px; overflow:hidden">
+                            <div class="clip-title">
+                                {{.Webinar.Title}}
                             </div>
-                            <div class="card-text text-secondary" style="height: 60px"><small>
-                                    <div class="clip-context">
-                                        {{.Webinar.Desc}}
-                                    </div>
-                                </small>
-                            </div>
-                            <form action="/student/webinar/{{.Webinar.ID}}" method="get">
-                                <input type="submit" class="btn btn-dark" value="Show Details"/>
-                            </form>
                         </div>
+                        <div class="card-text text-blue-1"><small>{{.Webinar.Category}}</small></div>
+                        <div class="d-flex flex-column flex-md-row mb-2">
+                            {{if eq .Status 0}}
+                            <span class="badge badge-warning mr-2">Waiting for Approval</span>
+                            {{else if eq .Status 1}}
+                            <span class="badge badge-success mr-2">Approved</span>
+                            {{end}}
+                        </div>
+                        <div class="card-text text-secondary" style="height: 60px"><small>
+                                <div class="clip-context">
+                                    {{.Webinar.Desc}}
+                                </div>
+                            </small>
+                        </div>
+                        <form action="/student/webinar/{{.Webinar.ID}}" method="get">
+                            <input type="submit" class="btn btn-dark" value="Show Details" />
+                        </form>
                     </div>
                 </div>
+            </div>
             {{end}}
         </div>
     </div>
-    </body>
+</body>
 
 </html>
 <script>
@@ -71,7 +73,14 @@
                 $(c).text($(c).text().substr(0, 100));
                 $(c).append(" ...");
             }
-        });
-    </script>
+        }
+        for (let c of $("div.clip-title")) {
+            if ($(c).innerHeight() >= 50) {
+                $(c).text($(c).text().substr(0, 70));
+                $(c).append(" ...");
+            }
+        }
+    });
+</script>
 
 {{end}}
