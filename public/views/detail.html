@@ -10,6 +10,12 @@
 <body class="sess">
     {{template "_navbar_teacher"}}
     <div class="container mt-4">
+        <!-- <div class="alert alert-success" role="alert">
+            You have successfully changed your webinar.
+        </div>
+        <div class="alert alert-danger" role="alert">
+            Something went wrong. Try again.
+        </div> -->
         <div class="row mb-3">
             <div class="col-12">
                 <div class="row">
@@ -23,38 +29,57 @@
                             <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg">
                             {{end}}
                             <div class="card-body">
-                                <div class="h4"><b>{{.webinar.Title}}</b></div>
-                                <div class="card-text">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <div class="h4 text-blue mr-auto"><b>{{.webinar.Title}}</b></div>
+                                    </div>
+                                    <div class="col-2 d-flex justify-content-end">
+                                        <button href="#" class="btn btn-sm btn-outline-secondary mr-2"
+                                            style="width:30px; height:30px" data-toggle="modal"
+                                            data-target="#editModal">
+                                            <i class="fa fa-pencil-alt"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-danger"
+                                            style="width:30px; height:30px" data-toggle="modal"
+                                            data-target="#deleteModal">
+                                            <i class="fa fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-text text-dark-gray">
                                     {{.webinar.Desc}}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4">
+                    <div class="col-lg-4 col-md-4 text-dark-gray">
                         <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title"><b>Webinar Details</b></h5>
-                                <p class="card-text"><b>Date: </b></p>{{.webinar.ScheduleString}}
-                                <br>
-                                <p class="card-text mt-2"><b>Category: </b></p>{{.webinar.Category}} <br>
-                                <p class="card-text mt-2"><b>Teacher: </b></p>{{.teacher.Name}}<br>
-                                <p class="card-text mt-2"><b>Meeting Link: </b></p>{{.webinar.Link}}
+                            <div class="card-body ">
+                                <h5 class="card-title text-blue">Webinar Details</h5>
+                                <p class="card-text text-blue-1">Date: </p>
+                                <p class="card-text">{{.webinar.ScheduleString}}</p>
+                                <p class="card-text mt-2 text-blue-1">Category: </p>
+                                <p class="card-text">{{.webinar.Category}}</p>
+                                <p class="card-text mt-2 text-blue-1">Teacher: </p>
+                                <p class="card-text">{{.teacher.Name}}</p>
+                                <p class="card-text mt-2 text-blue-1">Meeting Link: </p>
+                                <p class="card-text">{{.webinar.Link}}</p>
                             </div>
                         </div>
-                        <div class="card mb-4">
+                        <div class="card mb-4" style="width: auto; height: 200px;">
                             <div class="card-body">
-                                <h5 class="card-title"><b>Participants</b></h5>
-                                {{ range .participants}}
-                                <div class="mb-2">
-                                    <div class="row">
+                                <h5 class="card-title text-blue">Participants</h5>
+                                <div class="scrollable">
+                                    {{ range .participants}}
+                                    <div class="row mb-2">
                                         <div class="col-6">{{.Student.Name}}</div>
                                         <div class="col-6">
                                             <!-- <div class="btn btn-warning">Requested</div> -->
-                                            <div class="btn btn-success">{{.Status}}</div>
+                                            <div class="btn btn-sm btn-success">{{.Status}}</div>
                                         </div>
                                     </div>
+                                    {{end}}
                                 </div>
-                                {{end}}
                             </div>
                         </div>
                     </div>
@@ -62,7 +87,108 @@
             </div>
         </div>
     </div>
+    <!--Edit Modal-->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-blue" id="exampleModalLabel">Edit Webinar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body text-dark-gray">
+                    <form action="" method="POST">
+                        <div class="row mb-2">
+                            <div class="col">
+                                <label for="">Title of Webinar</label>
+                                <input type="text" name="title" class="form-control" placeholder="Title">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">
+                                <label for="">Description
+                                </label>
+                                <textarea name="description" class="form-control" placeholder="Description"
+                                    onkeyup="countChar(this)" maxlength="250"></textarea>
+                                <div class="d-flex justify-content-end">
+                                    <small class="text-secondary" id="charNum"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">
+                                <label for="">Meeting Link </label>
+                                <input type="text" name="link" id="link" class="form-control" placeholder="https://...">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">
+                                <label for="">Schedule </label>
+                                <input type="text" name="schedule_string" title="YYYY-MM-DD HH:MM" class="form-control"
+                                    placeholder="YYYY-MM-DD HH:MM">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">
+                                <label for="">Category </label>
+                                <select class="form-control" name="category" id="">
+                                    <option>Science</option>
+                                    <option>Social</option>
+                                    <option>Literature</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col-12 col-md-8 col-lg-8 d-flex justify-content-end flex-column flex-md-row ">
+                                <button type="button" class="btn btn-outline-secondary mr-lg-2 mr-md-2 mr-0 my-2 my-md-0 my-lg-0"
+                                    data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn-blue m-0" value="Save changes">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Delete Modal-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-blue" id="exampleModalLabel">Delete Webinar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body text-dark-gray">
+                    <form action="" method="">
+                        <h5 class="my-3">Are you sure you want to delete this webinar?</h5>
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col-12 col-md-8 col-lg-8 d-flex justify-content-end flex-column flex-md-row">
+                                <button type="button" class="btn btn-outline-secondary mr-lg-2 mr-md-2 mr-0 my-2 my-md-0 my-lg-0"
+                                    data-dismiss="modal">No</button>
+                                <input type="submit" class="btn btn-danger m-0" value="Yes, delete">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
+<script>
+    function countChar(val) {
+        var len = val.value.length;
+        if (len >= 250) {
+            $('#charNum').text("You have reached the maximum characters limit.")
+            val.value = val.value.substring(0, 250);
+        } else {
+            $('#charNum').text(250 - len + " characters left.");
+        }
+    };
+</script>
 
 </html>
 {{end}}

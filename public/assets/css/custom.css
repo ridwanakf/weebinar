@@ -2,30 +2,18 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-.sess{
+.sess {
   background-color: #f8f9fc;
 }
 
-/* .img-center {
-  width: 300px;
-  height: 300px;
-  display: block;
-  margin: auto;
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-} */
-
 .img-center {
-  width:100px; 
-  height:auto;
-  padding:10px;
-  position: relative;          /* where the next element will be automatically positioned */
-  display: inline-block;       /* causes element width to shrink to fit content */
-  left: 50%;                   /* moves left side of image/element to center of parent element */
-  transform: translate(-50%);  /* centers image/element on "left: 50%" position */
+  width: 100px;
+  height: auto;
+  padding: 10px;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 .index {
@@ -55,10 +43,6 @@ body {
   height: auto;
 }
 
-/* vertical spacing between columns */
-/* [class*="col-"] {
-    margin-bottom: 30px;
-} */
 .content {
   height: 100%;
   /* padding: 1.25rem; */
@@ -75,7 +59,7 @@ body {
 .content-settings {
   /* padding-top: 45px;
     padding-bottom: 45px; */
-  background-color: rgba(255, 255, 255);
+  background-color: rgb(255, 255, 255);
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.35rem;
@@ -85,8 +69,65 @@ body {
   padding: 3 rem;
 }
 
+.bg-blue {
+  background: #698eb8;
+}
+
+.text-blue {
+  color: rgb(58, 101, 150);
+}
+
+.text-blue-1 {
+  color: #698eb8;
+}
+
+.text-dark-gray {
+  color: #444444;
+}
+
+a.text-blue:hover,
+a.text-blue:focus {
+  color: #698eb8;
+}
+
+.btn-blue {
+  display: inline-block;
+  font-weight: 400;
+  margin: 8px 0px 0px;
+  padding: 6px 12px;
+  border:0;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: #fff;
+  background-color: #698eb8;
+}
+
+.btn-blue:hover {
+  color: #fff;
+  background-color: rgb(58, 101, 150);
+  border-color: rgb(58, 101, 150);
+}
+
+.btn-blue:focus,
+.btn-blue.focus {
+  color: #fff;
+  background-color: rgb(58, 101, 150);
+  border-color: rgb(58, 101, 150);
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+}
+
+.btn-blue:active{
+  border:0;
+}
+
 /* Dropdown Button */
 .dropbtn {
+  color: #444444;
   background-color: transparent;
   border: transparent;
   cursor: pointer;
@@ -95,7 +136,7 @@ body {
 /* Dropdown button on hover & focus */
 .dropbtn:hover,
 .dropbtn:focus {
-  color: #2980b9;
+  color: #698eb8;
   outline: transparent;
 }
 
@@ -110,7 +151,7 @@ body {
   display: none;
   position: absolute;
   background-color: #fff;
-  max-width: 120px;
+  width: 120px;
   /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
   border: 1px solid #dee2e6 !important;
   border-radius: 5px;
@@ -119,7 +160,7 @@ body {
 
 /* Links inside the dropdown */
 .dropdown-content a {
-  color: black;
+  color: #444444;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
@@ -172,12 +213,6 @@ body {
   object-position: center; /* Center the image within the element */
 }
 
-/* #notifDropdown {
-  width: 270px;
-  height: auto;
-  word-wrap: break-word;
-} */
-
 .input-icons i {
   position: absolute;
 }
@@ -197,8 +232,8 @@ body {
   text-align: center;
 }
 
-.card-img-top{
-  height:200px;
+.card-img-top {
+  height: 200px;
   object-fit: cover;
   object-position: center; /* Center the image within the element */
 }
@@ -210,29 +245,29 @@ body {
   overflow: scroll;
 }
 
-input{
+input {
   word-break: break-word;
 }
 
 @keyframes fadeInUp {
   from {
-      transform: translate3d(0,40px,0)
+    transform: translate3d(0, 40px, 0);
   }
 
   to {
-      transform: translate3d(0,0,0);
-      opacity: 1
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
   }
 }
 
 @-webkit-keyframes fadeInUp {
   from {
-      transform: translate3d(0,40px,0)
+    transform: translate3d(0, 40px, 0);
   }
 
   to {
-      transform: translate3d(0,0,0);
-      opacity: 1
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
   }
 }
 
@@ -240,15 +275,20 @@ input{
   animation-duration: 1s;
   animation-fill-mode: both;
   -webkit-animation-duration: 1s;
-  -webkit-animation-fill-mode: both
+  -webkit-animation-fill-mode: both;
 }
 
 .animatedFadeInUp {
-  opacity: 0
+  opacity: 0;
 }
 
 .fadeInUp {
   opacity: 0;
   animation-name: fadeInUp;
   -webkit-animation-name: fadeInUp;
+}
+
+.scrollable{
+  overflow-y: auto;
+  max-height: 300px;
 }

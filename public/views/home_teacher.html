@@ -7,7 +7,7 @@
     {{template "_header"}}
 </head>
 
-<body class="sess">
+<body class="sess text-dark-gray">
     {{template "_navbar_teacher"}}
     <div class="container mt-4">
         <div class="row mb-3 ">
@@ -16,16 +16,16 @@
             </div>
         </div>
         <div class="row ">
-            <div class="col d-flex flex-column flex-lg-row">
+            <div class="col">
                 <h5 class="mr-md-auto mb-2">Your Webinars</h5>
             </div>
         </div>
         <div class="row mb-5">
             <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
-                <div class="content content-settings zoom center py-4" style="width: auto;">
-                    <img class="create-img mb-4" src="/assets/images/add.png" alt="Card image cap">
+                <div class="content content-settings zoom center py-4 shadow" style="width: auto;">
+                    <img class="create-img mb-4" src="/assets/images/add (2).png" alt="Card image cap">
                     <form action="/teacher/webinar/create" method="get" id="create">
-                    <a class="text-dark h5 stretched-link" href="#" id="createLink">Create a Webinar</a>
+                    <a class="h5 text-blue stretched-link" href="#" id="createLink">Create a Webinar</a>
                         <script>
                             document.getElementById("createLink").onclick = function(){
                                 document.getElementById("create").submit();
@@ -37,24 +37,25 @@
             </div>
             {{range .webinars}}
             <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
-                <div class="content content-settings zoom" style="width: auto;">
+                <div class="content content-settings zoom shadow" style="width: auto;">
                     {{if eq .Category "Science"}}
-                    <img class="card-img-top" src="/assets/images/nasa-Q1p7bh3SHj8-unsplash.jpg">
+                    <img class="card-img-top" src="/assets/images/nasa-Q1p7bh3SHj8-unsplash.jpg" style="height:100px">
                     {{else if eq .Category "Social"}}
-                    <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg">
+                    <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg" style="height:100px">
                     {{else}}
-                    <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg">
+                    <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg" style="height:100px">
                     {{end}}
                     <div class="card-body">
-                        <h5 class="card-title">{{.Title}}</h5>
-                        <div class="card-text text-secondary"><small>
+                        <p class="card-title text-blue" style="margin-bottom:0; height: 50px; overflow:hidden">{{.Title}}</p>
+                        <div class="card-text text-blue-1"><small>{{.Category}}</small></div>
+                        <div class="card-text text-secondary" style="height: 60px"><small>
                                 <div class="clip-context">
                                     {{.Desc}}
                                 </div>
                             </small>
                         </div>
                         <form action="/teacher/webinar/{{.ID}}" method="get">
-                            <input type="submit" class="btn btn-dark mt-2" value="Show Details" />
+                            <input type="submit" class="btn-blue mt-2" value="Show Details" style="color:white; background-color:#698EB8" />
                         </form>
                     </div>
                 </div>
@@ -78,8 +79,8 @@
 <script>
     $(document).ready(function () {
         for (let c of $("div.clip-context")) {
-            if ($(c).innerHeight() >= 95) {
-                $(c).text($(c).text().substr(0, 170));
+            if ($(c).innerHeight() >= 25) {
+                $(c).text($(c).text().substr(0, 100));
                 $(c).append(" ...");
             }
         }

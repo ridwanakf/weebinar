@@ -7,7 +7,7 @@
         {{template "_header"}}
     </head>
 
-    <body class="sess">
+<body class="sess text-dark-gray">
     {{template "_navbar_student"}}
     <!--Web Content (Webinar Details)-->
     <div class="container mt-4">
@@ -24,24 +24,25 @@
                                 <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg">
                             {{end}}
                             <div class="card-body">
-                                <div class="h4"><b>{{.webinar.Title}}</b></div>
+                                <div class="h4 text-blue mr-auto"><b>{{.webinar.Title}}</b></div>
                                 <div class="card-text">
                                     {{.webinar.Desc}}
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <div class="card mb-4">
                             <div class="card-body">
-                                <h5 class="card-title"><b>Webinar Details</b></h5>
-                                <p class="card-text"><b>Date: </b></p>{{.webinar.ScheduleString}}
-                                <br>
-                                <p class="card-text mt-2"><b>Category: </b></p>{{.webinar.Category}} <br>
-                                <p class="card-text mt-2"><b>Teacher: </b></p>{{.teacher.Name}}<br>
-                                <p class="card-text mt-2"><b>Meeting Link: </b></p>{{.webinar.Link}}
+                                <h5 class="card-title text-blue">Webinar Details</h5>
+                                <p class="card-text text-blue-1">Date: </p>
+                                <p class="card-text">{{.webinar.ScheduleString}}</p>
+                                <p class="card-text mt-2 text-blue-1">Category: </p>
+                                <p class="card-text">{{.webinar.Category}}</p>
+                                <p class="card-text mt-2 text-blue-1">Teacher: </p>
+                                <p class="card-text">{{.teacher.Name}}</p>
+                                <p class="card-text mt-2 text-blue-1">Meeting Link: </p>
+                                <p class="card-text">{{.webinar.Link}}</p>
                             </div>
                             <div class="col-12">
                                 {{if eq .status -1}}

@@ -1,12 +1,12 @@
 {{define "_navbar_student"}}
     <div class="d-flex flex-column flex-md-row flex-lg-row p-2 px-md-4 bg-white border-bottom">
         <nav class="navbar my-0 mr-sm-auto mr-md-auto mr-lg-auto h1 ml-4">
-            <a class="navbar-brand" href="/student/home">Weebinar</a>
+            <a class="navbar-brand text-blue" href="/student/home">Weebinar</a>
             <form class="navbar-search mr-sm-auto mr-md-auto mr-lg-auto">
                 <div class="input-group">
                     <input type="text" id="search-input" class="form-control border small" placeholder="Search for...">
                     <div class="input-group-append">
-                        <button class="btn btn-dark" onclick="search()" type="button"><i class="fas fa-search"></i>
+                        <button class="btn-blue m-0" type="button" style="color:white; background-color:rgb(105,142,184)" onclick="search()"><i class="fas fa-search"></i>
                         </button>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
     <div class="modal fade" id="signOutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
+            <div class="modal-content text-dark-gray">
                 <div class="modal-header">
                     <p class="modal-title">Sign Out</p>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -39,8 +39,10 @@
                     <p>Are you sure you want to sign out?</p>
                 </div>
                 <div class="modal-footer border-0 pt-0">
-                    <button type="button" onclick="logout()" class="btn btn-primary">Yes, sign out</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <div class="col-12 col-md-8 col-lg-8 d-flex justify-content-end flex-column flex-md-row">
+                        <button type="button" onclick="logout()" class="btn btn-outline-secondary mr-lg-2 mr-md-2 mr-0 my-2 my-md-0 my-lg-0">Yes, sign out</button>
+                        <button type="button" class="btn-blue btn-block m-0" data-dismiss="modal">No</button>
+                    </div>
                 </div>
             </div>
         </div>
