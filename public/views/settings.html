@@ -8,7 +8,7 @@
 </head>
 
 <body class="sess">
-    {{template "_navbar"}}
+    {{template "_navbar_student"}}
     <div class="container mt-4">
         <div class="row mb-3">
             <div class="col"></div>
@@ -19,26 +19,26 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-4 center">
                                 <div class="d-flex justify-content-center">
-                                    <img src="{{.teacher.Picture}}" alt="" class="img-account mb-3">
+                                    <img src="{{.user.Picture}}" alt="" class="img-account mb-3">
                                 </div>
                             </div>
                             <div class="col-lg-9 col-md-8 form-group mt-3 mt-lg-0 mt-md-0">
                                 <div class="row mb-2">
                                     <div class="col">
                                         <label for="">Name</label>
-                                        <input type="text" class="form-control" value="{{.teacher.Name}}" disabled> 
+                                        <input type="text" class="form-control" value="{{.user.Name}}" disabled>
                                     </div>
                                 </div>
                                 <div class="row mb-2">
                                     <div class="col">
                                         <label for="">Email</label>
-                                        <input type="text" class="form-control" value="{{.teacher.Email}}" disabled> 
+                                        <input type="text" class="form-control" value="{{.user.Email}}" disabled>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <label for="">Role</label>
-                                        <input type="text" name="" id="" class="form-control" disabled> 
+                                        <input type="text" name="" id="" class="form-control" value="{{.role}}" disabled>
                                     </div>
                                 </div>
                             </div>

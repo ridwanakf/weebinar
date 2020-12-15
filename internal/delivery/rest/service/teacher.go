@@ -60,7 +60,8 @@ func (s *TeacherService) ProfileTeacherPageHandler(c echo.Context) error {
 		return Logout(c)
 	}
 	return c.Render(http.StatusOK, "settings", map[string]interface{}{
-		"teacher": teacher,
+		"user": teacher,
+		"role": "teacher",
 	})
 }
 
@@ -115,13 +116,14 @@ func (s *TeacherService) WebinarDetailPageHandler(c echo.Context) error {
 
 	teacher, err := s.uc.GetTeacherProfile(webinar.TeacherID)
 	if err != nil {
-		log.Printf("[TeacherService][ProfileTeacherPageHandler] error getting user details: %+v\n", err)
+		log.Printf("[TeacherService][WebinarDetailPageHandler] error getting user details: %+v\n", err)
 		return Logout(c)
 	}
 
 	return c.Render(http.StatusOK, "detail", map[string]interface{}{
-		"teacher": teacher,
-		"webinar": webinar,
+		"teacher":      teacher,
+		"webinar":      webinar,
+		"participants": webinar.Participants,
 	})
 }
 
@@ -141,6 +143,13 @@ func (s *TeacherService) UpdateWebinarHandler(c echo.Context) error {
 	}
 	webinarParam.ID = webinarID
 
+	t, err := datePlusTime(webinarParam.ScheduleString)
+	if err != nil {
+		log.Printf("[TeacherService][UpdateWebinarHandler] error parsing schedule: %+v\n", err)
+		return c.Render(http.StatusOK, "create_failed", nil)
+	}
+	webinarParam.Schedule = t
+
 	teacherID, err := GetUserSessionID(c)
 	if err != nil {
 		log.Printf("[TeacherService][UpdateWebinarHandler] error getting user id from session: %+v\n", err)
@@ -150,6 +159,39 @@ func (s *TeacherService) UpdateWebinarHandler(c echo.Context) error {
 	err = s.uc.UpdateWebinar(teacherID, webinarParam)
 	if err != nil {
 		log.Printf("[TeacherService][UpdateWebinarHandler] error when updating webinar: %+v\n", err)
+		return BackToHome(c)
+	}
+
+	// TODO: render popup message
+	return BackToHome(c)
+}
+
+func (s *TeacherService) ApproveStudentHandler(c echo.Context) error {
+	WebinarIDParam := c.Param("id")
+
+	webinarID, err := strconv.ParseInt(WebinarIDParam, 10, 64)
+	if err != nil {
+		log.Printf("[TeacherService][ApproveStudentHandler] error parsing id from query param: %+v\n", err)
+		return BackToHome(c)
+	}
+
+	StudentIDParam := c.Param("student_id")
+
+	StudentID, err := strconv.ParseInt(StudentIDParam, 10, 64)
+	if err != nil {
+		log.Printf("[TeacherService][ApproveStudentHandler] error parsing student_id from query param: %+v\n", err)
+		return BackToHome(c)
+	}
+
+	teacherID, err := GetUserSessionID(c)
+	if err != nil {
+		log.Printf("[TeacherService][ApproveStudentHandler] error getting user id from session: %+v\n", err)
+		return Logout(c)
+	}
+
+	err = s.uc.ApproveWaitingList(teacherID, StudentID, webinarID)
+	if err != nil {
+		log.Printf("[TeacherService][ApproveStudentHandlers] error when approving student: %+v\n", err)
 		return BackToHome(c)
 	}
 
@@ -175,7 +217,7 @@ func (s *TeacherService) DeleteWebinarHandler(c echo.Context) error {
 
 	err = s.uc.DeleteWebinar(teacherID, webinarParam)
 	if err != nil {
-		log.Printf("[TeacherService][DeleteWebinarHandler] error when updating webinar: %+v\n", err)
+		log.Printf("[TeacherService][DeleteWebinarHandler] error when deleting webinar: %+v\n", err)
 		return BackToHome(c)
 	}
 

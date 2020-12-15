@@ -3,8 +3,6 @@ package service
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/pkg/errors"
-	"github.com/ridwanakf/weebinar/internal/entity"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -13,8 +11,10 @@ import (
 	"github.com/gorilla/sessions"
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
+	"github.com/pkg/errors"
 	"github.com/ridwanakf/weebinar/internal"
 	"github.com/ridwanakf/weebinar/internal/app"
+	"github.com/ridwanakf/weebinar/internal/entity"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 )
@@ -62,11 +62,7 @@ func (s *CommonService) IndexHandler(c echo.Context) error {
 
 func (s *CommonService) SignOutHandler(c echo.Context) error {
 	sess, _ := session.Get("session", c)
-	sess.Options = &sessions.Options{
-		Path:     "/",
-		MaxAge:   -1,
-		HttpOnly: true,
-	}
+	sess.Options.MaxAge = -1
 
 	sess.Save(c.Request(), c.Response())
 
@@ -213,6 +209,6 @@ func Logout(c echo.Context) error {
 	return c.Redirect(http.StatusMovedPermanently, "/logout")
 }
 
-func BackToHome(c echo.Context) error{
+func BackToHome(c echo.Context) error {
 	return c.Redirect(http.StatusMovedPermanently, "/")
 }

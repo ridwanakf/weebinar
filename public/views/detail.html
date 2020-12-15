@@ -8,7 +8,7 @@
 </head>
 
 <body class="sess">
-    {{template "_navbar"}}
+    {{template "_navbar_teacher"}}
     <div class="container mt-4">
         <!-- <div class="alert alert-success" role="alert">
             You have successfully changed your webinar.
@@ -57,7 +57,7 @@
                             <div class="card-body ">
                                 <h5 class="card-title text-blue">Webinar Details</h5>
                                 <p class="card-text text-blue-1">Date: </p>
-                                <p class="card-text">{{.webinar.Schedule}}</p>
+                                <p class="card-text">{{.webinar.ScheduleString}}</p>
                                 <p class="card-text mt-2 text-blue-1">Category: </p>
                                 <p class="card-text">{{.webinar.Category}}</p>
                                 <p class="card-text mt-2 text-blue-1">Teacher: </p>
@@ -72,11 +72,18 @@
                                 <div class="scrollable">
                                     {{ range .participants}}
                                     <div class="row mb-2">
-                                        <div class="col-6">{{.Name}}</div>
-                                        <div class="col-6">
-                                            <!-- <div class="btn btn-warning">Requested</div> -->
-                                            <div class="btn btn-sm btn-success">{{.Status}}</div>
-                                        </div>
+                                        <div class="col-6">{{.Student.Name}}</div>
+                                        {{if eq .Status 0}}
+                                            <form action="/teacher/webinar/{{$.webinar.ID}}/approve/{{.Student.ID}}" method="post">
+                                                <input type="submit" class="btn btn-dark btn-block my-4" value="Approve"/>
+                                            </form>
+                                        {{else}}
+                                            <p class="center text-success my-4">Approved</p>
+                                        {{end}}
+{{/*                                        <div class="col-6">*/}}
+{{/*                                            <div class="btn btn-warning">Requested</div>*/}}
+{{/*                                            <div class="btn btn-sm btn-success">{{.Status}}</div>*/}}
+{{/*                                        </div>*/}}
                                     </div>
                                     {{end}}
                                 </div>
@@ -97,11 +104,11 @@
                             aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body text-dark-gray">
-                    <form action="" method="POST">
+                    <form action="/teacher/webinar/{{.webinar.ID}}/update" method="POST">
                         <div class="row mb-2">
                             <div class="col">
                                 <label for="">Title of Webinar</label>
-                                <input type="text" name="title" class="form-control" placeholder="Title">
+                                <input type="text" name="title" class="form-control" placeholder="Title" value="">
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -161,7 +168,7 @@
                             aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body text-dark-gray">
-                    <form action="" method="">
+                    <form action="/teacher/webinar/{{.webinar.ID}}/delete" method="post">
                         <h5 class="my-3">Are you sure you want to delete this webinar?</h5>
                         <div class="row">
                             <div class="col"></div>

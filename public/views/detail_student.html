@@ -1,14 +1,14 @@
 {{define "detail_student"}}
 
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    {{template "_header"}}
-</head>
+    <head>
+        {{template "_header"}}
+    </head>
 
 <body class="sess text-dark-gray">
-    {{template "_navbar"}}
+    {{template "_navbar_student"}}
     <!--Web Content (Webinar Details)-->
     <div class="container mt-4">
         <div class="row mb-3">
@@ -17,21 +17,16 @@
                     <div class="col-lg-8 col-md-8">
                         <div class="card">
                             {{if eq .webinar.Category "Science"}}
-                            <img class="card-img-top" src="/assets/images/nasa-Q1p7bh3SHj8-unsplash.jpg">
+                                <img class="card-img-top" src="/assets/images/nasa-Q1p7bh3SHj8-unsplash.jpg">
                             {{else if eq .webinar.Category "Social"}}
-                            <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg">
+                                <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg">
                             {{else}}
-                            <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg">
+                                <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg">
                             {{end}}
                             <div class="card-body">
-                                <div class="h4 text-blue mr-auto"><b>Webinar 1</b></div>
+                                <div class="h4 text-blue mr-auto"><b>{{.webinar.Title}}</b></div>
                                 <div class="card-text">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed eros
-                                    vehicula, pellentesque est et, tincidunt purus. Aliquam arcu quam, dictum non
-                                    pretium id, viverra vitae leo. Sed mattis, nisi et tincidunt vulputate, odio risus
-                                    convallis velit, vel venenatis eros eros nec massa. Suspendisse faucibus enim eget
-                                    nisi convallis, quis pharetra tortor interdum. Duis eu risus sed odio dapibus tempus
-                                    nec ac nibh.
+                                    {{.webinar.Desc}}
                                 </div>
                             </div>
                         </div>
@@ -41,7 +36,7 @@
                             <div class="card-body">
                                 <h5 class="card-title text-blue">Webinar Details</h5>
                                 <p class="card-text text-blue-1">Date: </p>
-                                <p class="card-text">{{.webinar.Schedule}}</p>
+                                <p class="card-text">{{.webinar.ScheduleString}}</p>
                                 <p class="card-text mt-2 text-blue-1">Category: </p>
                                 <p class="card-text">{{.webinar.Category}}</p>
                                 <p class="card-text mt-2 text-blue-1">Teacher: </p>
@@ -50,9 +45,15 @@
                                 <p class="card-text">{{.webinar.Link}}</p>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-dark btn-block my-4">Register</button>
-                                <!-- <p class="center text-secondary my-4">Waiting for Approval</p>
-                                <p class="center text-success my-4">Approved</p> -->
+                                {{if eq .status -1}}
+                                    <form action="/student/webinar/{{.webinar.ID}}/enroll" method="post">
+                                        <input type="submit" class="btn btn-dark btn-block my-4" value="Register"/>
+                                    </form>
+                                {{else if eq .status 0}}
+                                    <p class="center text-secondary my-4">Waiting for Approval</p>
+                                {{else}}
+                                    <p class="center text-success my-4">Approved</p>
+                                {{end}}
                             </div>
                         </div>
                     </div>
@@ -60,6 +61,6 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+    </body>
+    </html>
 {{end}}

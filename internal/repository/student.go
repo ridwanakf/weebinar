@@ -45,11 +45,22 @@ func (s *StudentDB) GetProfile(id int64) (entity.Student, error) {
 }
 
 func (s *StudentDB) GetAllRegisteredWebinar(id int64) ([]entity.Webinar, error) {
-	var webinars []entity.Webinar
+	var (
+		webinars      []entity.Webinar
+		participants []entity.Participants
+	)
 
 	err := s.db.Select(&webinars, SQLGetRegisteredWebinars, id)
 	if err != nil {
 		return nil, err
+	}
+
+	for k, _ := range webinars{
+		err = s.db.Select(&participants, SQLGetParticipants, webinars[k].ID)
+		if err != nil {
+			return webinars, err
+		}
+		webinars[k].Participants = participants
 	}
 
 	return webinars, nil

@@ -1,19 +1,19 @@
 {{define "home_student"}}
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <title>{{.title}}</title>
-    {{template "_header"}}
-</head>
+    <head>
+        <title>{{.title}}</title>
+        {{template "_header"}}
+    </head>
 
 <body class="sess text-dark-gray">
-    {{template "_navbar"}}
+    {{template "_navbar_student"}}
     <!--Web Content (Home)-->
     <div class="container mt-4 ">
         <div class="row mb-3">
             <div class="col">
-                <h2>Hello, name!</h2>
+                <h2>Hello, {{.student.Name}}!</h2>
             </div>
         </div>
         <div class="row">
@@ -22,100 +22,46 @@
             </div>
         </div>
         <div class="row mb-5">
-            <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
-                <div class="content content-settings zoom shadow" style="width: auto;">
-                    <!-- <img class="card-img-top" src="/assets/images/nasa-Q1p7bh3SHj8-unsplash.jpg" style="height:100px"> -->
-                    <!-- <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg" style="height:100px"> -->
-                    <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg" style="height:100px">
-                    <div class="card-body">
-                        <p class="card-title text-blue" style="margin-bottom:0; height: 50px; overflow:hidden">Webinar 1</p>
-                        <div class="card-text text-blue-1"><small>Literature</small></div>
-                        <div class="card-text text-secondary" style="height: 60px"><small>
-                                <div class="clip-context">
-                                    Some quick example text to build on the card title and make up the bulk of
-                                    the card's content.
-                                </div>
-                            </small>
+            {{range .webinars_and_status}}
+                <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
+                    <div class="content content-settings zoom shadow" style="width: auto;">
+                        {{if eq .Webinar.Category "Science"}}
+                            <img class="card-img-top" src="/assets/images/nasa-Q1p7bh3SHj8-unsplash.jpg">
+                        {{else if eq .Webinar.Category "Social"}}
+                            <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg">
+                        {{else}}
+                            <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg">
+                        {{end}}
+                        <div class="card-body">
+                            <p class="card-title text-blue" style="margin-bottom:0; height: 50px; overflow:hidden">{{.Webinar.Title}}</p>
+                            <div class="card-text text-blue-1"><small>{{.Webinar.Category}}</small></div>
+                            <div class="d-flex flex-column flex-md-row mb-2">
+                                {{if eq .Status 0}}
+                                    <div class="d-flex flex-column flex-md-row mb-2">
+                                        <span class="badge badge-warning mr-2">Waiting for Approval</span>
+                                    </div>
+                                {{else if eq .Status 1}}
+                                    <div class="d-flex flex-column flex-md-row mb-2">
+                                        <span class="badge badge-success mr-2">Approved</span>
+                                    </div>
+                                {{end}}
+                            </div>
+                            <div class="card-text text-secondary" style="height: 60px"><small>
+                                    <div class="clip-context">
+                                        {{.Webinar.Desc}}
+                                    </div>
+                                </small>
+                            </div>
+                            <form action="/student/webinar/{{.Webinar.ID}}" method="get">
+                                <input type="submit" class="btn btn-dark" value="Show Details"/>
+                            </form>
                         </div>
-                        <form action="/student/webinar/{{.ID}}" method="get">
-                            <input type="submit" class="btn-blue mt-2" value="Show Details" style="color:white; background-color:#698EB8;" />
-                        </form>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <h4>Other Webinars</h4>
-            </div>
-        </div>
-        <div class="row mb-5">
-            <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
-                <div class="content content-settings zoom shadow" style="width: auto;">
-                    <!-- <img class="card-img-top" src="/assets/images/nasa-Q1p7bh3SHj8-unsplash.jpg" style="height:100px"> -->
-                    <!-- <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg" style="height:100px"> -->
-                    <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg" style="height:100px">
-                    <div class="card-body">
-                        <p class="card-title text-blue" style="margin-bottom:0; height: 50px; overflow:hidden">Webinar 1</p>
-                        <div class="card-text text-blue-1"><small>Literature</small></div>
-                        <div class="card-text text-secondary" style="height: 60px"><small>
-                                <div class="clip-context">
-                                    Some quick example text to build on the card title and make up the bulk of
-                                    the card's content.
-                                </div>
-                            </small>
-                        </div>
-                        <form action="/student/webinar/{{.ID}}" method="get">
-                            <input type="submit" class="btn-blue mt-2" value="Show Details" style="color:white; background-color:#698EB8;" />
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
-                <div class="content content-settings zoom shadow" style="width: auto;">
-                    <!-- <img class="card-img-top" src="/assets/images/nasa-Q1p7bh3SHj8-unsplash.jpg" style="height:100px"> -->
-                    <!-- <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg" style="height:100px"> -->
-                    <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg" style="height:100px">
-                    <div class="card-body">
-                        <p class="card-title text-blue" style="margin-bottom:0; height: 50px; overflow:hidden">Webinar 1</p>
-                        <div class="card-text text-blue-1"><small>Literature</small></div>
-                        <div class="card-text text-secondary" style="height: 60px"><small>
-                                <div class="clip-context">
-                                    Some quick example text to build on the card title and make up the bulk of
-                                    the card's content.
-                                </div>
-                            </small>
-                        </div>
-                        <form action="/student/webinar/{{.ID}}" method="get">
-                            <input type="submit" class="btn-blue mt-2" value="Show Details" style="color:white; background-color:#698EB8;" />
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
-                <div class="content content-settings zoom shadow" style="width: auto;">
-                    <!-- <img class="card-img-top" src="/assets/images/nasa-Q1p7bh3SHj8-unsplash.jpg" style="height:100px"> -->
-                    <!-- <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg" style="height:100px"> -->
-                    <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg" style="height:100px">
-                    <div class="card-body">
-                        <p class="card-title text-blue" style="margin-bottom:0; height: 50px; overflow:hidden">Webinar Webinar 1 Webinar 1 Webinar 11</p>
-                        <div class="card-text text-blue-1"><small>Literature</small></div>
-                        <div class="card-text text-secondary" style="height: 60px"><small>
-                                <div class="clip-context">
-                                    Some quick example text to build on the card title and make up the bulk of
-                                    the card's content.
-                                </div>
-                            </small>
-                        </div>
-                        <form action="/student/webinar/{{.ID}}" method="get">
-                            <input type="submit" class="btn-blue mt-2" value="Show Details" style="color:white; background-color:#698EB8;" />
-                        </form>
-                    </div>
-                </div>
-            </div>
+            {{end}}
         </div>
     </div>
-</body>
+    </body>
 
 </html>
 <script>
@@ -125,8 +71,7 @@
                 $(c).text($(c).text().substr(0, 100));
                 $(c).append(" ...");
             }
-        }
-    });
-</script>
+        });
+    </script>
 
 {{end}}

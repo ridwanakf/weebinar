@@ -1,0 +1,87 @@
+{{define "_navbar_student"}}
+    <div class="d-flex flex-column flex-md-row flex-lg-row p-2 px-md-4 bg-white border-bottom">
+        <nav class="navbar my-0 mr-sm-auto mr-md-auto mr-lg-auto h1 ml-4">
+            <a class="navbar-brand text-blue" href="/student/home">Weebinar</a>
+            <form class="navbar-search mr-sm-auto mr-md-auto mr-lg-auto">
+                <div class="input-group">
+                    <input type="text" id="search-input" class="form-control border small" placeholder="Search for...">
+                    <div class="input-group-append">
+                        <button class="btn-blue m-0" type="button" style="color:white; background-color:rgb(105,142,184)" onclick="search()"><i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </nav>
+        <nav class="navbar my-2 my-md-0 ">
+            <div class="dropdown mx-4">
+                <button onclick="usernameDropdown()" class="dropbtn">User
+                    <i class="dropdown-icon fas fa-angle-down ml-1"></i>
+                </button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="/student/profile">Your Account</a>
+                    <a href="#" data-toggle="modal" data-target="#signOutModal">Sign Out</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Sign Out Modal -->
+    <div class="modal fade" id="signOutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content text-dark-gray">
+                <div class="modal-header">
+                    <p class="modal-title">Sign Out</p>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body h5 lead center m-0">
+                    <p>Are you sure you want to sign out?</p>
+                </div>
+                <div class="modal-footer border-0 pt-0">
+                    <div class="modal-footer border-0 pt-0">
+                        <button type="button" onclick="logout()"
+                                class="btn btn-outline-secondary ">Yes, sign out
+                        </button>
+                        <button type="button" class="btn-blue" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        //Username dropdown
+        /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+        function usernameDropdown() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        function search() {
+            window.location.href = '/student/webinar/search?slug=' + document.getElementById('search-input').value;
+        }
+
+        function logout() {
+            window.location.href = '/logout';
+        }
+
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+
+        //sign out modal
+        $('#signOutModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        });
+    </script>
+{{end}}
