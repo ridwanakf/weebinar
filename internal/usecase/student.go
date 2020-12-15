@@ -14,7 +14,7 @@ func NewStudentUsecase(repoStudent internal.StudentRepo, repoWebinar internal.We
 	return &StudentUsecase{repoStudent: repoStudent, repoWebinar: repoWebinar}
 }
 
-func (s *StudentUsecase) StudentSignIn(id int64) error {
+func (s *StudentUsecase) StudentSignIn(id string) error {
 	err := s.repoStudent.IsUserExist(id)
 	if err != nil {
 		return err
@@ -32,7 +32,7 @@ func (s *StudentUsecase) StudentSignUp(student entity.Student) error {
 	return nil
 }
 
-func (s *StudentUsecase) GetStudentProfile(id int64) (entity.Student, error) {
+func (s *StudentUsecase) GetStudentProfile(id string) (entity.Student, error) {
 	student, err := s.repoStudent.GetProfile(id)
 	if err != nil {
 		return entity.Student{}, err
@@ -59,7 +59,7 @@ func (s *StudentUsecase) GetWebinarByID(id int64) (entity.Webinar, error) {
 	return webinar, nil
 }
 
-func (s *StudentUsecase) EnrollWebinar(studentID int64, param entity.EnrollWebinarParam) error {
+func (s *StudentUsecase) EnrollWebinar(studentID string, param entity.EnrollWebinarParam) error {
 	err := param.Validate()
 	if err != nil {
 		return err
@@ -73,7 +73,7 @@ func (s *StudentUsecase) EnrollWebinar(studentID int64, param entity.EnrollWebin
 	return nil
 }
 
-func (s *StudentUsecase) GetAllRegisteredWebinar(studentID int64) ([]entity.Webinar, error) {
+func (s *StudentUsecase) GetAllRegisteredWebinar(studentID string) ([]entity.Webinar, error) {
 	webinars, err := s.repoStudent.GetAllRegisteredWebinar(studentID)
 	if err != nil {
 		return nil, err
@@ -82,7 +82,7 @@ func (s *StudentUsecase) GetAllRegisteredWebinar(studentID int64) ([]entity.Webi
 	return webinars, nil
 }
 
-func (s *StudentUsecase) CancelEnrollmentWebinar(studentID int64, param entity.CancelEnrollmentWebinarParam) error {
+func (s *StudentUsecase) CancelEnrollmentWebinar(studentID string, param entity.CancelEnrollmentWebinarParam) error {
 	err := param.Validate()
 	if err != nil {
 		return err

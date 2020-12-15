@@ -13,7 +13,7 @@ func NewTeacherDB(db *sqlx.DB) *TeacherDB {
 	return &TeacherDB{db: db}
 }
 
-func (t *TeacherDB) IsUserExist(id int64) error {
+func (t *TeacherDB) IsUserExist(id string) error {
 	isExist := false
 
 	err := t.db.Get(&isExist, SQLCheckTeacherExist, id)
@@ -33,7 +33,7 @@ func (t *TeacherDB) InsertNewUser(teacher entity.Teacher) error {
 	return nil
 }
 
-func (t *TeacherDB) GetProfile(id int64) (entity.Teacher, error) {
+func (t *TeacherDB) GetProfile(id string) (entity.Teacher, error) {
 	var teacher entity.Teacher
 
 	err := t.db.Get(&teacher, SQLGetTeacherProfile, id)
@@ -44,7 +44,7 @@ func (t *TeacherDB) GetProfile(id int64) (entity.Teacher, error) {
 	return teacher, nil
 }
 
-func (t *TeacherDB) ApproveWaitingList(id int64, studentID int64, webinarID int64) error {
+func (t *TeacherDB) ApproveWaitingList(id string, studentID string, webinarID int64) error {
 	_, err := t.db.Exec(SQLApproveStudent, id, webinarID, studentID)
 	if err != nil {
 		return err
@@ -53,7 +53,7 @@ func (t *TeacherDB) ApproveWaitingList(id int64, studentID int64, webinarID int6
 	return nil
 }
 
-func (t *TeacherDB) RejectWaitingList(id int64, studentID int64, webinarID int64) error {
+func (t *TeacherDB) RejectWaitingList(id string, studentID string, webinarID int64) error {
 	_, err := t.db.Exec(SQLRejectStudent, id, webinarID, studentID)
 	if err != nil {
 		return err

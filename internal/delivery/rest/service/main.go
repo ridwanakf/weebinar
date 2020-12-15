@@ -21,16 +21,16 @@ func GetServices(app *app.WeebinarApp) *Services {
 	}
 }
 
-func GetUserSessionID(c echo.Context) (int64, error) {
+func GetUserSessionID(c echo.Context) (string, error) {
 	sess, err := session.Get("session", c)
 	if err != nil {
-		return -1, err
+		return "", err
 	}
 
 	id, ok := sess.Values["id"]
 	if !ok {
-		return -1, entity.ErrIDNotFoundInSession
+		return "", entity.ErrIDNotFoundInSession
 	}
 
-	return id.(int64), nil
+	return id.(string), nil
 }
