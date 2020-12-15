@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS webinar_mst
     schedule        timestamp    NOT NULL,
     schedule_string varchar(50)  NOT NULL,
     created_at      timestamp    NOT NULL DEFAULT now(),
-    CONSTRAINT fk_teacher_webinar FOREIGN KEY (teacher_id) REFERENCES teacher_mst (id)
+    CONSTRAINT fk_teacher_webinar FOREIGN KEY (teacher_id) REFERENCES teacher_mst (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS participant_mst

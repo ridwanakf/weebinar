@@ -219,7 +219,7 @@ func (s *TeacherService) DeleteWebinarHandler(c echo.Context) error {
 		log.Printf("[TeacherService][DeleteWebinarHandler] error when updating webinar: %+v\n", err)
 		return BackToHome(c)
 	}
-
+	log.Println("test")
 	// TODO: render popup message
 	return BackToHome(c)
 }
