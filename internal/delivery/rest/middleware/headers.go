@@ -3,6 +3,8 @@ package middleware
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"net/http"
+	"time"
 )
 
 // Headers adds general security headers for basic security measures
@@ -20,6 +22,19 @@ func Headers() echo.MiddlewareFunc {
 			c.Response().Header().Set("X-Download-Options", "noopen")
 			// Minimal XSS protection
 			c.Response().Header().Set("X-XSS-Protection", "1; mode=block")
+			return next(c)
+		}
+	}
+}
+
+// No Cache
+func NoCache() echo.MiddlewareFunc {
+	return func(next echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			c.Response().Header().Set("Cache-Control", "no-cache, private, max-age=0")
+			c.Response().Header().Set("Expires", time.Unix(0, 0).Format(http.TimeFormat))
+			c.Response().Header().Set("Pragma", "no-cache")
+			c.Response().Header().Set("X-Accel-Expires", "0")
 			return next(c)
 		}
 	}
