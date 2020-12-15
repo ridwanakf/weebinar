@@ -1,7 +1,7 @@
 {{define "_navbar_teacher"}}
     <div class="d-flex flex-column flex-md-row flex-lg-row p-2 px-md-4 bg-white border-bottom">
         <nav class="navbar my-0 mr-sm-auto mr-md-auto mr-lg-auto h1 ml-4">
-            <a class="navbar-brand text-blue" href="/teacher/home">Weebinar</a>
+            <a class="navbar-brand text-blue" href="/teacher/home"><b>Weebinar</b></a>
         </nav>
         <nav class="navbar my-2 my-md-0 ">
             <div class="dropdown mx-4">
@@ -30,10 +30,8 @@
                     <p>Are you sure you want to sign out?</p>
                 </div>
                 <div class="modal-footer border-0 pt-0">
-                    <button type="button" onclick="logout()"
-                            class="btn btn-outline-secondary ">Yes, sign out
-                    </button>
-                    <button type="button" class="btn-blue" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">No</button>                    
+                    <button type="button" onclick="logout()"class="btn-blue">Yes, sign out</button>
                 </div>
             </div>
         </div>

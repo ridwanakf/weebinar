@@ -25,9 +25,9 @@
                 <div class="content content-settings zoom center py-4 shadow" style="width: auto;">
                     <img class="create-img mb-4" src="/assets/images/add (2).png" alt="Card image cap">
                     <form action="/teacher/webinar/create" method="get" id="create">
-                    <a class="h5 text-blue stretched-link" href="#" id="createLink">Create a Webinar</a>
+                        <a class="h5 text-blue stretched-link" href="#" id="createLink">Create a Webinar</a>
                         <script>
-                            document.getElementById("createLink").onclick = function(){
+                            document.getElementById("createLink").onclick = function () {
                                 document.getElementById("create").submit();
                             }
                         </script>
@@ -41,12 +41,18 @@
                     {{if eq .Category "Science"}}
                     <img class="card-img-top" src="/assets/images/nasa-Q1p7bh3SHj8-unsplash.jpg" style="height:100px">
                     {{else if eq .Category "Social"}}
-                    <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg" style="height:100px">
+                    <img class="card-img-top" src="/assets/images/ethan-hu-USSFmYDPNa4-unsplash.jpg"
+                        style="height:100px">
                     {{else}}
-                    <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg" style="height:100px">
+                    <img class="card-img-top" src="/assets/images/freestocks-RgKmrxpIraY-unsplash.jpg"
+                        style="height:100px">
                     {{end}}
                     <div class="card-body">
-                        <p class="card-title text-blue" style="margin-bottom:0; height: 50px; overflow:hidden">{{.Title}}</p>
+                        <div class="card-title text-blue" style="margin-bottom:0; height: 50px; overflow:hidden">
+                            <div class="clip-title">
+                                {{.Title}}
+                            </div>
+                        </div>
                         <div class="card-text text-blue-1"><small>{{.Category}}</small></div>
                         <div class="card-text text-secondary" style="height: 60px"><small>
                                 <div class="clip-context">
@@ -55,7 +61,8 @@
                             </small>
                         </div>
                         <form action="/teacher/webinar/{{.ID}}" method="get">
-                            <input type="submit" class="btn-blue mt-2" value="Show Details" style="color:white; background-color:#698EB8" />
+                            <input type="submit" class="btn-blue mt-2" value="Show Details"
+                                style="color:white; background-color:#698EB8" />
                         </form>
                     </div>
                 </div>
@@ -81,6 +88,12 @@
         for (let c of $("div.clip-context")) {
             if ($(c).innerHeight() >= 25) {
                 $(c).text($(c).text().substr(0, 100));
+                $(c).append(" ...");
+            }
+        }
+        for (let c of $("div.clip-title")) {
+            if ($(c).innerHeight() >= 50) {
+                $(c).text($(c).text().substr(0, 70));
                 $(c).append(" ...");
             }
         }

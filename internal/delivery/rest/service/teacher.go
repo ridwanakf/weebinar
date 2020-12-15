@@ -124,6 +124,7 @@ func (s *TeacherService) WebinarDetailPageHandler(c echo.Context) error {
 		"teacher":      teacher,
 		"webinar":      webinar,
 		"participants": webinar.Participants,
+		"lenparticipants": len(webinar.Participants),
 	})
 }
 
