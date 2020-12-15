@@ -6,7 +6,7 @@ import (
 
 type Webinar struct {
 	ID             int64          `json:"id" db:"id" form:"id"`
-	TeacherID      int64          `json:"teacher_id" db:"teacher_id" form:"teacher_id"`
+	TeacherID      string          `json:"teacher_id" db:"teacher_id" form:"teacher_id"`
 	Title          string         `json:"title" db:"title" form:"title"`
 	Desc           string         `json:"description" db:"description" form:"description"`
 	Link           string         `json:"link" db:"link" form:"link"`
@@ -23,7 +23,7 @@ type Participants struct {
 }
 
 type CreateWebinarParam struct {
-	TeacherID      int64     `json:"teacher_id" db:"teacher_id" form:"teacher_id"`
+	TeacherID      string     `json:"teacher_id" db:"teacher_id" form:"teacher_id"`
 	Title          string    `json:"title" db:"title" form:"title"`
 	Desc           string    `json:"description" db:"description" form:"description"`
 	Link           string    `json:"link" db:"link" form:"link"`

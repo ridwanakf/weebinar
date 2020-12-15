@@ -232,7 +232,7 @@ func (s *StudentService) CancelEnrollWebinarHandler(c echo.Context) error {
 	return c.Render(http.StatusOK, "", nil)
 }
 
-func (s *StudentService) isRegistered(studentID int64, webinar entity.Webinar) int32 {
+func (s *StudentService) isRegistered(studentID string, webinar entity.Webinar) int32 {
 	for _, v := range webinar.Participants {
 		if v.ID == studentID {
 			return v.Status

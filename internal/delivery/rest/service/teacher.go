@@ -168,18 +168,11 @@ func (s *TeacherService) UpdateWebinarHandler(c echo.Context) error {
 
 func (s *TeacherService) ApproveStudentHandler(c echo.Context) error {
 	WebinarIDParam := c.Param("id")
+	StudentID := c.Param("student_id")
 
 	webinarID, err := strconv.ParseInt(WebinarIDParam, 10, 64)
 	if err != nil {
 		log.Printf("[TeacherService][ApproveStudentHandler] error parsing id from query param: %+v\n", err)
-		return BackToHome(c)
-	}
-
-	StudentIDParam := c.Param("student_id")
-
-	StudentID, err := strconv.ParseInt(StudentIDParam, 10, 64)
-	if err != nil {
-		log.Printf("[TeacherService][ApproveStudentHandler] error parsing student_id from query param: %+v\n", err)
 		return BackToHome(c)
 	}
 

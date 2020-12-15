@@ -1,25 +1,25 @@
 CREATE TABLE IF NOT EXISTS teacher_mst
 (
-    id      bigint      NOT NULL PRIMARY KEY,
-    name    varchar(50) NOT NULL DEFAULT '',
-    email   varchar(50) NOT NULL DEFAULT '',
-    picture varchar(200)         DEFAULT '',
+    id      varchar(100) NOT NULL PRIMARY KEY,
+    name    varchar(50)  NOT NULL DEFAULT '',
+    email   varchar(50)  NOT NULL DEFAULT '',
+    picture varchar(200)          DEFAULT '',
     CONSTRAINT id_teacher_unique UNIQUE (id)
 );
 
 CREATE TABLE IF NOT EXISTS student_mst
 (
-    id      bigint      NOT NULL PRIMARY KEY,
-    name    varchar(50) NOT NULL DEFAULT '',
-    email   varchar(50) NOT NULL DEFAULT '',
-    picture varchar(200)         DEFAULT '',
+    id      varchar(100) NOT NULL PRIMARY KEY,
+    name    varchar(50)  NOT NULL DEFAULT '',
+    email   varchar(50)  NOT NULL DEFAULT '',
+    picture varchar(200)          DEFAULT '',
     CONSTRAINT id_student_unique UNIQUE (id)
 );
 
 CREATE TABLE IF NOT EXISTS webinar_mst
 (
     id              bigserial    NOT NULL PRIMARY KEY,
-    teacher_id      bigint       NOT NULL,
+    teacher_id      varchar(100) NOT NULL,
     title           varchar(100) NOT NULL DEFAULT '',
     description     varchar(250)          DEFAULT '',
     link            varchar(250) NOT NULL DEFAULT '',
@@ -32,10 +32,10 @@ CREATE TABLE IF NOT EXISTS webinar_mst
 
 CREATE TABLE IF NOT EXISTS participant_mst
 (
-    teacher_id bigint NOT NULL,
-    webinar_id bigint NOT NULL,
-    student_id bigint NOT NULL,
-    status     int2   NOT NULL DEFAULT 0,
+    teacher_id varchar(100) NOT NULL,
+    webinar_id bigint       NOT NULL,
+    student_id varchar(100) NOT NULL,
+    status     int2         NOT NULL DEFAULT 0,
     CONSTRAINT fk_teacher_participant FOREIGN KEY (teacher_id) REFERENCES teacher_mst (id) ON DELETE CASCADE,
     CONSTRAINT fk_webinar_participant FOREIGN KEY (webinar_id) REFERENCES webinar_mst (id) ON DELETE CASCADE,
     CONSTRAINT fk_student_participant FOREIGN KEY (student_id) REFERENCES student_mst (id) ON DELETE CASCADE

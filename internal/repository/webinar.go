@@ -13,7 +13,7 @@ func NewWebinarDB(db *sqlx.DB) *WebinarDB {
 	return &WebinarDB{db: db}
 }
 
-func (w *WebinarDB) GetAllWebinar(id int64) ([]entity.Webinar, error) {
+func (w *WebinarDB) GetAllWebinar(id string) ([]entity.Webinar, error) {
 	var webinars []entity.Webinar
 
 	err := w.db.Select(&webinars, SQLGetAllWebinarByTeacherID, id)
@@ -24,7 +24,7 @@ func (w *WebinarDB) GetAllWebinar(id int64) ([]entity.Webinar, error) {
 	return webinars, nil
 }
 
-func (w *WebinarDB) InsertNewWebinar(id int64, param entity.CreateWebinarParam) error {
+func (w *WebinarDB) InsertNewWebinar(id string, param entity.CreateWebinarParam) error {
 	_, err := w.db.Exec(SQLInsertNewWebinar, id, param.Title, param.Desc, param.Link, param.Category, param.Schedule, param.ScheduleString)
 	if err != nil {
 		return err
@@ -33,7 +33,7 @@ func (w *WebinarDB) InsertNewWebinar(id int64, param entity.CreateWebinarParam) 
 	return nil
 }
 
-func (w *WebinarDB) UpdateWebinar(id int64, param entity.UpdateWebinarParam) error {
+func (w *WebinarDB) UpdateWebinar(id string, param entity.UpdateWebinarParam) error {
 	_, err := w.db.Exec(SQLUpdateWebinar, param.Title, param.Desc, param.Link, param.Category, param.Schedule, param.ScheduleString, id, param.ID)
 	if err != nil {
 		return err
@@ -42,7 +42,7 @@ func (w *WebinarDB) UpdateWebinar(id int64, param entity.UpdateWebinarParam) err
 	return nil
 }
 
-func (w *WebinarDB) DeleteWebinar(id int64, param entity.DeleteWebinarParam) error {
+func (w *WebinarDB) DeleteWebinar(id string, param entity.DeleteWebinarParam) error {
 	_, err := w.db.Exec(SQLDeleteWebinar, id, param.ID)
 	if err != nil {
 		return err

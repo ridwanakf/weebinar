@@ -14,7 +14,7 @@ func NewTeacherUsecase(repoTeacher internal.TeacherRepo, repoWebinar internal.We
 	return &TeacherUsecase{repoTeacher: repoTeacher, repoWebinar: repoWebinar}
 }
 
-func (t *TeacherUsecase) TeacherSignIn(id int64) error {
+func (t *TeacherUsecase) TeacherSignIn(id string) error {
 	err := t.repoTeacher.IsUserExist(id)
 	if err != nil {
 		return err
@@ -30,7 +30,7 @@ func (t *TeacherUsecase) TeacherSignUp(teacher entity.Teacher) error {
 	return nil
 }
 
-func (t *TeacherUsecase) GetTeacherProfile(id int64) (entity.Teacher, error) {
+func (t *TeacherUsecase) GetTeacherProfile(id string) (entity.Teacher, error) {
 	teacher, err := t.repoTeacher.GetProfile(id)
 	if err != nil {
 		return entity.Teacher{}, err
@@ -38,7 +38,7 @@ func (t *TeacherUsecase) GetTeacherProfile(id int64) (entity.Teacher, error) {
 	return teacher, nil
 }
 
-func (t *TeacherUsecase) GetAllWebinar(teacherID int64) ([]entity.Webinar, error) {
+func (t *TeacherUsecase) GetAllWebinar(teacherID string) ([]entity.Webinar, error) {
 	webinars, err := t.repoWebinar.GetAllWebinar(teacherID)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func (t *TeacherUsecase) GetWebinarByID(id int64) (entity.Webinar, error) {
 	return webinar, nil
 }
 
-func (t *TeacherUsecase) CreateNewWebinar(id int64, param entity.CreateWebinarParam) error {
+func (t *TeacherUsecase) CreateNewWebinar(id string, param entity.CreateWebinarParam) error {
 	err := param.Validate()
 	if err != nil {
 		return err
@@ -69,7 +69,7 @@ func (t *TeacherUsecase) CreateNewWebinar(id int64, param entity.CreateWebinarPa
 	return nil
 }
 
-func (t *TeacherUsecase) UpdateWebinar(id int64, param entity.UpdateWebinarParam) error {
+func (t *TeacherUsecase) UpdateWebinar(id string, param entity.UpdateWebinarParam) error {
 	err := param.Validate()
 	if err != nil {
 		return err
@@ -82,7 +82,7 @@ func (t *TeacherUsecase) UpdateWebinar(id int64, param entity.UpdateWebinarParam
 	return nil
 }
 
-func (t *TeacherUsecase) DeleteWebinar(id int64, param entity.DeleteWebinarParam) error {
+func (t *TeacherUsecase) DeleteWebinar(id string, param entity.DeleteWebinarParam) error {
 	err := param.Validate()
 	if err != nil {
 		return err
@@ -95,7 +95,7 @@ func (t *TeacherUsecase) DeleteWebinar(id int64, param entity.DeleteWebinarParam
 	return nil
 }
 
-func (t *TeacherUsecase) ApproveWaitingList(id int64, studentID int64, webinarID int64) error {
+func (t *TeacherUsecase) ApproveWaitingList(id string, studentID string, webinarID int64) error {
 	err := t.repoTeacher.ApproveWaitingList(id, studentID, webinarID)
 	if err != nil {
 		return err
@@ -104,7 +104,7 @@ func (t *TeacherUsecase) ApproveWaitingList(id int64, studentID int64, webinarID
 	return nil
 }
 
-func (t *TeacherUsecase) RejectWaitingList(id int64, studentID int64, webinarID int64) error {
+func (t *TeacherUsecase) RejectWaitingList(id string, studentID string, webinarID int64) error {
 	err := t.repoTeacher.RejectWaitingList(id, studentID, webinarID)
 	if err != nil {
 		return err

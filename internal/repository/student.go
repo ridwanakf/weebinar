@@ -13,7 +13,7 @@ func NewStudentDB(db *sqlx.DB) *StudentDB {
 	return &StudentDB{db: db}
 }
 
-func (s *StudentDB) IsUserExist(id int64) error {
+func (s *StudentDB) IsUserExist(id string) error {
 	isExist := false
 
 	err := s.db.Get(&isExist, SQLCheckStudentExist, id)
@@ -33,7 +33,7 @@ func (s *StudentDB) InsertNewUser(student entity.Student) error {
 	return nil
 }
 
-func (s *StudentDB) GetProfile(id int64) (entity.Student, error) {
+func (s *StudentDB) GetProfile(id string) (entity.Student, error) {
 	var student entity.Student
 
 	err := s.db.Get(&student, SQLGetStudentProfile, id)
@@ -44,7 +44,7 @@ func (s *StudentDB) GetProfile(id int64) (entity.Student, error) {
 	return student, nil
 }
 
-func (s *StudentDB) GetAllRegisteredWebinar(id int64) ([]entity.Webinar, error) {
+func (s *StudentDB) GetAllRegisteredWebinar(id string) ([]entity.Webinar, error) {
 	var (
 		webinars      []entity.Webinar
 		participants []entity.Participants
@@ -66,7 +66,7 @@ func (s *StudentDB) GetAllRegisteredWebinar(id int64) ([]entity.Webinar, error) 
 	return webinars, nil
 }
 
-func (s *StudentDB) EnrollWebinar(id int64, param entity.EnrollWebinarParam) error {
+func (s *StudentDB) EnrollWebinar(id string, param entity.EnrollWebinarParam) error {
 	_, err := s.db.Exec(SQLEnrollWebinar, id, param.WebinarID, param.TeacherID)
 	if err != nil {
 		return err
@@ -75,7 +75,7 @@ func (s *StudentDB) EnrollWebinar(id int64, param entity.EnrollWebinarParam) err
 	return nil
 }
 
-func (s *StudentDB) CancelEnrollmentWebinar(id int64, param entity.CancelEnrollmentWebinarParam) error {
+func (s *StudentDB) CancelEnrollmentWebinar(id string, param entity.CancelEnrollmentWebinarParam) error {
 	_, err := s.db.Exec(SQLCancelEnrollWebinar, id, param.WebinarID, param.TeacherID)
 	if err != nil {
 		return err

@@ -3,11 +3,6 @@ package service
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"log"
-	"net/http"
-	"strconv"
-
 	"github.com/gorilla/sessions"
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
@@ -17,6 +12,9 @@ import (
 	"github.com/ridwanakf/weebinar/internal/entity"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
+	"io/ioutil"
+	"log"
+	"net/http"
 )
 
 type CommonService struct {
@@ -92,11 +90,7 @@ func (s *CommonService) TeacherSignInCallbackHandler(c echo.Context) error {
 		return c.Redirect(http.StatusMovedPermanently, "/")
 	}
 
-	teacher.ID, err = strconv.ParseInt(user.ID, 10, 64)
-	if err == nil {
-		fmt.Printf("[CommonService][TeacherSignInCallbackHandler] error converting id from string to int64: %+v\n", err)
-		return c.Redirect(http.StatusMovedPermanently, "/")
-	}
+	teacher.ID = user.ID
 	teacher.Email = user.Email
 	teacher.Name = user.Name
 	teacher.Picture = user.Picture
@@ -137,11 +131,7 @@ func (s *CommonService) StudentSignInCallbackHandler(c echo.Context) error {
 		return c.Redirect(http.StatusMovedPermanently, "/")
 	}
 
-	student.ID, err = strconv.ParseInt(user.ID, 10, 64)
-	if err == nil {
-		fmt.Printf("[CommonService][StudentSignInCallbackHandler] error converting id from string to int64: %+v\n", err)
-		return c.Redirect(http.StatusMovedPermanently, "/")
-	}
+	student.ID = user.ID
 	student.Email = user.Email
 	student.Name = user.Name
 	student.Picture = user.Picture
@@ -189,7 +179,7 @@ func (s *CommonService) oAuthCallback(c echo.Context, role string) ([]byte, erro
 	return content, nil
 }
 
-func (s *CommonService) createSession(c echo.Context, id int64, name string, email string, role string) {
+func (s *CommonService) createSession(c echo.Context, id string, name string, email string, role string) {
 	sess, _ := session.Get("session", c)
 	sess.Options = &sessions.Options{
 		Path:     "/",
