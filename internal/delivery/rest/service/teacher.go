@@ -143,6 +143,13 @@ func (s *TeacherService) UpdateWebinarHandler(c echo.Context) error {
 	}
 	webinarParam.ID = webinarID
 
+	t, err := datePlusTime(webinarParam.ScheduleString)
+	if err != nil {
+		log.Printf("[TeacherService][UpdateWebinarHandler] error parsing schedule: %+v\n", err)
+		return c.Render(http.StatusOK, "create_failed", nil)
+	}
+	webinarParam.Schedule = t
+
 	teacherID, err := GetUserSessionID(c)
 	if err != nil {
 		log.Printf("[TeacherService][UpdateWebinarHandler] error getting user id from session: %+v\n", err)
@@ -152,6 +159,38 @@ func (s *TeacherService) UpdateWebinarHandler(c echo.Context) error {
 	err = s.uc.UpdateWebinar(teacherID, webinarParam)
 	if err != nil {
 		log.Printf("[TeacherService][UpdateWebinarHandler] error when updating webinar: %+v\n", err)
+		return BackToHome(c)
+	}
+
+	// TODO: render popup message
+	return BackToHome(c)
+}
+
+func (s *TeacherService) ApproveStudentHandler(c echo.Context) error {
+	idParam := c.Param("id")
+
+	webinarID, err := strconv.ParseInt(idParam, 10, 64)
+	if err != nil {
+		log.Printf("[TeacherService][ApproveStudentHandler] error parsing id from query param: %+v\n", err)
+		return BackToHome(c)
+	}
+
+	webinarParam := entity.UpdateWebinarParam{}
+	if err := c.Bind(&webinarParam); err != nil {
+		log.Printf("[TeacherService][ApproveStudentHandler] error binding model request: %+v\n", err)
+		return BackToHome(c)
+	}
+	webinarParam.ID = webinarID
+
+	teacherID, err := GetUserSessionID(c)
+	if err != nil {
+		log.Printf("[TeacherService][ApproveStudentHandler] error getting user id from session: %+v\n", err)
+		return Logout(c)
+	}
+
+	err = s.uc.UpdateWebinar(teacherID, webinarParam)
+	if err != nil {
+		log.Printf("[TeacherService][ApproveStudentHandlers] error when updating webinar: %+v\n", err)
 		return BackToHome(c)
 	}
 

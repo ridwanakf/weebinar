@@ -22,7 +22,7 @@ const (
 							VALUES ($1, $2, $3, $4, $5, $6, $7, now()) RETURNING id`
 
 	SQLUpdateWebinar = `UPDATE webinar_mst SET title = $1, description = $2, link = $3, category = $4, schedule = $5, schedule_string = $6
-						WHERE teacher_id=$6 AND id=$7`
+						WHERE teacher_id=$7 AND id=$8`
 
 	SQLDeleteWebinar = `DELETE FROM webinar_mst WHERE teacher_id=$1 AND id=$2`
 

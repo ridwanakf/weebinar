@@ -73,10 +73,17 @@
                                     {{ range .participants}}
                                     <div class="row mb-2">
                                         <div class="col-6">{{.Student.Name}}</div>
-                                        <div class="col-6">
-                                            <!-- <div class="btn btn-warning">Requested</div> -->
-                                            <div class="btn btn-sm btn-success">{{.Status}}</div>
-                                        </div>
+                                        {{if eq .Status 0}}
+                                            <form action="/teacher/webinar/{{$.webinar.ID}}/approve/{{.Student.ID}}" method="post">
+                                                <input type="submit" class="btn btn-dark btn-block my-4" value="Approve"/>
+                                            </form>
+                                        {{else}}
+                                            <p class="center text-success my-4">Waiting for Approval</p>
+                                        {{end}}
+{{/*                                        <div class="col-6">*/}}
+{{/*                                            <div class="btn btn-warning">Requested</div>*/}}
+{{/*                                            <div class="btn btn-sm btn-success">{{.Status}}</div>*/}}
+{{/*                                        </div>*/}}
                                     </div>
                                     {{end}}
                                 </div>
@@ -97,11 +104,11 @@
                             aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body text-dark-gray">
-                    <form action="" method="POST">
+                    <form action="/teacher/webinar/{{.webinar.ID}}/update" method="POST">
                         <div class="row mb-2">
                             <div class="col">
                                 <label for="">Title of Webinar</label>
-                                <input type="text" name="title" class="form-control" placeholder="Title">
+                                <input type="text" name="title" class="form-control" placeholder="Title" value="">
                             </div>
                         </div>
                         <div class="row mb-2">

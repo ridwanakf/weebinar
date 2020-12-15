@@ -25,8 +25,9 @@ func initTeacherHandlers(eg *echo.Group, svc *service.Services) {
 	webinarGroup.GET("/create", svc.CreateWebinarPageHandler)
 	webinarGroup.POST("/create", svc.CreateWebinarPostHandler)
 	webinarGroup.GET("/:id", svc.WebinarDetailPageHandler)
-	webinarGroup.PUT("/:id/update", svc.UpdateWebinarHandler)
-	webinarGroup.DELETE("/:id/delete", svc.DeleteWebinarHandler)
+	webinarGroup.POST("/:id/update", svc.UpdateWebinarHandler)
+	webinarGroup.POST("/:id/approve/:student_id", svc.ApproveStudentHandler)
+	webinarGroup.POST("/:id/delete", svc.DeleteWebinarHandler)
 
 }
 
