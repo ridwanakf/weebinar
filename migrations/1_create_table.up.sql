@@ -36,9 +36,9 @@ CREATE TABLE IF NOT EXISTS participant_mst
     webinar_id bigint NOT NULL,
     student_id bigint NOT NULL,
     status     int2   NOT NULL DEFAULT 0,
-    CONSTRAINT fk_teacher_participant FOREIGN KEY (teacher_id) REFERENCES teacher_mst (id),
-    CONSTRAINT fk_webinar_participant FOREIGN KEY (webinar_id) REFERENCES webinar_mst (id),
-    CONSTRAINT fk_student_participant FOREIGN KEY (student_id) REFERENCES student_mst (id)
+    CONSTRAINT fk_teacher_participant FOREIGN KEY (teacher_id) REFERENCES teacher_mst (id) ON DELETE CASCADE,
+    CONSTRAINT fk_webinar_participant FOREIGN KEY (webinar_id) REFERENCES webinar_mst (id) ON DELETE CASCADE,
+    CONSTRAINT fk_student_participant FOREIGN KEY (student_id) REFERENCES student_mst (id) ON DELETE CASCADE
 );
 
 ALTER TABLE teacher_mst

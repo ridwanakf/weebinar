@@ -167,20 +167,21 @@ func (s *TeacherService) UpdateWebinarHandler(c echo.Context) error {
 }
 
 func (s *TeacherService) ApproveStudentHandler(c echo.Context) error {
-	idParam := c.Param("id")
+	WebinarIDParam := c.Param("id")
 
-	webinarID, err := strconv.ParseInt(idParam, 10, 64)
+	webinarID, err := strconv.ParseInt(WebinarIDParam, 10, 64)
 	if err != nil {
 		log.Printf("[TeacherService][ApproveStudentHandler] error parsing id from query param: %+v\n", err)
 		return BackToHome(c)
 	}
 
-	webinarParam := entity.UpdateWebinarParam{}
-	if err := c.Bind(&webinarParam); err != nil {
-		log.Printf("[TeacherService][ApproveStudentHandler] error binding model request: %+v\n", err)
+	StudentIDParam := c.Param("student_id")
+
+	StudentID, err := strconv.ParseInt(StudentIDParam, 10, 64)
+	if err != nil {
+		log.Printf("[TeacherService][ApproveStudentHandler] error parsing student_id from query param: %+v\n", err)
 		return BackToHome(c)
 	}
-	webinarParam.ID = webinarID
 
 	teacherID, err := GetUserSessionID(c)
 	if err != nil {
@@ -188,9 +189,9 @@ func (s *TeacherService) ApproveStudentHandler(c echo.Context) error {
 		return Logout(c)
 	}
 
-	err = s.uc.UpdateWebinar(teacherID, webinarParam)
+	err = s.uc.ApproveWaitingList(teacherID, StudentID, webinarID)
 	if err != nil {
-		log.Printf("[TeacherService][ApproveStudentHandlers] error when updating webinar: %+v\n", err)
+		log.Printf("[TeacherService][ApproveStudentHandlers] error when approving student: %+v\n", err)
 		return BackToHome(c)
 	}
 
@@ -216,10 +217,10 @@ func (s *TeacherService) DeleteWebinarHandler(c echo.Context) error {
 
 	err = s.uc.DeleteWebinar(teacherID, webinarParam)
 	if err != nil {
-		log.Printf("[TeacherService][DeleteWebinarHandler] error when updating webinar: %+v\n", err)
+		log.Printf("[TeacherService][DeleteWebinarHandler] error when deleting webinar: %+v\n", err)
 		return BackToHome(c)
 	}
-	log.Println("test")
+
 	// TODO: render popup message
 	return BackToHome(c)
 }
