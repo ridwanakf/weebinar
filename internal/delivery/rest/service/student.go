@@ -37,8 +37,32 @@ func (s *StudentService) HomeStudentPageHandler(c echo.Context) error {
 		return Logout(c)
 	}
 
+	webinars, err := s.uc.GetAllRegisteredWebinar(id)
+	if err != nil {
+		log.Printf("[StudentService][HomeStudentPageHandler] error getting user details: %+v\n", err)
+		return Logout(c)
+	}
+	// TODO: THIS IS SO UGLY
+	var webinarsWithStatus []struct {
+		Webinar entity.Webinar
+		Status  int32
+	}
+
+	for _, v := range webinars{
+		temp := struct {
+			Webinar entity.Webinar
+			Status  int32
+		}{
+			Webinar: v,
+			Status:  s.isRegistered(id, v),
+		}
+
+		webinarsWithStatus = append(webinarsWithStatus, temp)
+	}
+
 	return c.Render(http.StatusOK, "home_student", map[string]interface{}{
-		"student": student,
+		"student":  student,
+		"webinars_and_status": webinarsWithStatus,
 	})
 }
 

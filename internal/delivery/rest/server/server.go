@@ -60,7 +60,7 @@ func Start(e *echo.Echo, cfg *config.Server) {
 	// Start server
 	go func() {
 		if err := e.StartServer(s); err != nil {
-			e.Logger.Info("Shutting down the server")
+			e.Logger.Info("Shutting down the server. error: ", err)
 		}
 	}()
 

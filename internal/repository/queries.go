@@ -44,7 +44,7 @@ const (
 
 	SQLGetStudentProfile = `SELECT * FROM student_mst WHERE id=$1`
 
-	SQLGetRegisteredWebinars = `SELECT * FROM webinar_mst as w INNER JOIN participant_mst as p 
+	SQLGetRegisteredWebinars = `SELECT w.* FROM webinar_mst as w INNER JOIN participant_mst as p 
 								ON w.id=p.webinar_id WHERE p.student_id=$1`
 
 	SQLEnrollWebinar = `INSERT INTO participant_mst (student_id, webinar_id, teacher_id, status) 
