@@ -64,7 +64,7 @@ weebinar
 |   |-- repo.go                            # Interfaces / Contracts of all the repositories (Repository Pattern)
 |   |-- usecase.go                         # Interfaces / Contracts of all the use-cases (Application Business Logic)
 |-- migrations                             # Contains Database migration files or the system
-|-- views                                  # Contains client-side related code (Views)
+|-- public                                 # Contains client-side related code (Views)
 
 ```
 
