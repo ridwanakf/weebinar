@@ -43,7 +43,7 @@ This repository is organized in the following directory structure.
 weebinar
 |-- bin                                    # Contains binary of the built app
 |-- cmd                                    # Contains executable codes and serves as entry point of the app
-|   |-- gql                                # entry point of the app
+|   |-- main.go                            # entry point of the app
 |-- config                                 # Configuration files needed for deployment
 |-- constant                               # Collections of constants file for each module
 |-- internal                               # Go files in this folder represent the Big-Pictures and Contracts of the system
