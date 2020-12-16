@@ -38,8 +38,6 @@
     </div>
     <script type="text/javascript">
         //Username dropdown
-        /* When the user clicks on the button,
-        toggle between hiding and showing the dropdown content */
         function usernameDropdown() {
             document.getElementById("myDropdown").classList.toggle("show");
         }
@@ -49,7 +47,6 @@
             window.location.href = '/logout';
         }
 
-        // Close the dropdown menu if the user clicks outside of it
         window.onclick = function (event) {
             if (!event.target.matches('.dropbtn')) {
                 var dropdowns = document.getElementsByClassName("dropdown-content");
