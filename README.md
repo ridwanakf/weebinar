@@ -8,7 +8,7 @@ purposes.
 ### How to Set up The App
 
 1. Install Postgresql: [Postgresql](https://www.postgresql.org/download/)
-2. Setup your own configuration (for database and google oauth2) on `pokeapi/config/weebinad.yaml`
+2. Setup your own configuration (for database and google oauth2) on `weebinar/config/weebinar.yaml`
 3. Run database migrations: refer below
 4. Run Project by building binary or via Docker: refer below
 5. Try the app by going to `localhost:5000`
@@ -40,7 +40,7 @@ When running in Local, you need to run the db-migrations to setup the app's data
 This repository is organized in the following directory structure.
 
 ```
-pokeapi
+weebinar
 |-- bin                                    # Contains binary of the built app
 |-- cmd                                    # Contains executable codes and serves as entry point of the app
 |   |-- gql                                # entry point of the app
